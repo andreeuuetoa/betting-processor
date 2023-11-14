@@ -5,6 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PlayerOperationsTest {
     @Test
+    public void testPlayerInitialCoinbaseIsZero() {
+        Player player = new Player();
+        assertEquals(0, player.getCoins());
+    }
+
+    @Test
     public void testPlayerCanDeposit() {
         Player player = new Player();
         player.deposit(300);
