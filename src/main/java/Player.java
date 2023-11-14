@@ -12,7 +12,7 @@ public class Player {
 
     public void withdraw(int coinsToWithdraw) {
         if (coins - coinsToWithdraw < 0) {
-            throw new RuntimeException();
+            throw new RuntimeException("Player cannot withdraw more coins than he/she currently has.");
         }
         coins -= coinsToWithdraw;
     }
