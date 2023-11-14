@@ -16,4 +16,8 @@ public class Player {
         }
         coins -= coinsToWithdraw;
     }
+
+    public void betOnMatch(int coinsToBet, Match match) {
+        withdraw(coinsToBet);
+    }
 }
