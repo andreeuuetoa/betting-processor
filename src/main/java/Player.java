@@ -1,6 +1,10 @@
 public class Player {
     private int coins;
 
+    public Player() {
+        coins = 0;
+    }
+
     public int getCoins() {
         return coins;
     }
