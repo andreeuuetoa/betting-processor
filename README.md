@@ -1,2 +1,3 @@
 # betting-processor
-Solution for the PlayTech internship assignment
+This is my solution for the PlayTech internship assignment.
+The task is to create an application that processes betting data.
