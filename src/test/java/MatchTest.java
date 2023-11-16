@@ -21,7 +21,7 @@ public class MatchTest {
 
         assertEquals(1.3, sampleMatch.getMatchData().getABetRate());
         assertEquals(0.75, sampleMatch.getMatchData().getBBetRate());
-        assertEquals("A", sampleMatch.getMatchData().getWinningSide());
+        assertEquals("A", sampleMatch.getMatchData().getMatchOutcome());
     }
 
     @Test
