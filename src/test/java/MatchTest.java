@@ -18,7 +18,7 @@ public class MatchTest {
         Player player = new Player();
 
         player.deposit(100);
-        player.betOnMatch(30, sampleMatch);
+        player.betOnMatch(30, sampleMatch, "A");
 
         assertOneBettingWasCreatedForMatchByPlayerAndIsCorrect(sampleMatch, player);
     }
@@ -30,5 +30,29 @@ public class MatchTest {
         assertEquals(player, singleBettingOnMatch.getPlayer());
         assertEquals(sampleMatch, singleBettingOnMatch.getMatch());
         assertEquals(30, singleBettingOnMatch.getAmount());
+    }
+
+    @Test
+    public void testPlayerBetsOnASideAndWins() {
+        Match sampleMatch = new Match(1.3, 0.75, "A");
+        Player player = new Player();
+
+        player.deposit(100);
+        player.betOnMatch(30, sampleMatch, "A");
+
+        sampleMatch.payToPlayers();
+        assertEquals(109, player.getCoins());
+    }
+
+    @Test
+    public void testPlayerBetsOnBSideAndWins() {
+        Match sampleMatch = new Match(1.3, 0.75, "B");
+        Player player = new Player();
+
+        player.deposit(100);
+        player.betOnMatch(30, sampleMatch, "B");
+
+        sampleMatch.payToPlayers();
+        assertEquals(92, player.getCoins());
     }
 }

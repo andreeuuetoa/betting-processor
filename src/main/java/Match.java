@@ -27,4 +27,21 @@ public class Match {
     private boolean bettingsContainsABettingMadeByPlayer(Player player) {
         return bettings.stream().map(Betting::getPlayer).toList().contains(player);
     }
+
+    public void payToPlayers() {
+        for (Betting betting : bettings) {
+            processBetting(betting);
+        }
+    }
+
+    private void processBetting(Betting betting) {
+        Player bettingPlayer = betting.getPlayer();
+        if (betting.getSide().equals(getWinningSide())) {
+            if (getWinningSide().equals("A")) {
+                bettingPlayer.deposit((int) (betting.getAmount() * aBetRate));
+            } else if (getWinningSide().equals("B")) {
+                bettingPlayer.deposit((int) (betting.getAmount() * bBetRate));
+            }
+        }
+    }
 }

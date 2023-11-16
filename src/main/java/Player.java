@@ -20,9 +20,9 @@ public class Player {
         coins -= coinsToWithdraw;
     }
 
-    public void betOnMatch(int coinsToBet, Match match) {
+    public void betOnMatch(int coinsToBet, Match match, String side) {
         withdraw(coinsToBet);
-        Betting playerBetting = new Betting(this, match, coinsToBet);
+        Betting playerBetting = new Betting(this, match, coinsToBet, side);
         match.addBetting(playerBetting);
     }
 }
