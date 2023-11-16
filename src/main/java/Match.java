@@ -18,13 +18,13 @@ public class Match {
     }
 
     public void addBetting(Betting betting) {
-        if (bettingsCointainsABettingMadeByPlayer(betting.getPlayer())) {
+        if (bettingsContainsABettingMadeByPlayer(betting.getPlayer())) {
             throw new RuntimeException("This player is already betting on this match!");
         }
         bettings.add(betting);
     }
 
-    private boolean bettingsCointainsABettingMadeByPlayer(Player player) {
+    private boolean bettingsContainsABettingMadeByPlayer(Player player) {
         return bettings.stream().map(Betting::getPlayer).toList().contains(player);
     }
 }
