@@ -20,6 +20,10 @@ public class MatchTest {
         player.deposit(100);
         player.betOnMatch(30, sampleMatch);
 
+        assertOneBettingWasCreatedForMatchByPlayerAndIsCorrect(sampleMatch, player);
+    }
+
+    private static void assertOneBettingWasCreatedForMatchByPlayerAndIsCorrect(Match sampleMatch, Player player) {
         assertEquals(1, sampleMatch.getBettings().size());
 
         Betting singleBettingOnMatch = sampleMatch.getBettings().get(0);
