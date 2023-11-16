@@ -1,7 +1,7 @@
 public class Casino {
-    private int balance;
+    private long balance;
 
-    public int getBalance() {
+    public long getBalance() {
         return balance;
     }
 }
