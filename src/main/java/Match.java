@@ -1,19 +1,15 @@
-import lombok.Data;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
 public class Match {
-    private final double aBetRate;
-    private final double bBetRate;
-    private final String winningSide;
+    private MatchData matchData;
     private List<Betting> bettings;
 
-    public Match(double aBetRate, double bBetRate, String winningSide) {
-        this.aBetRate = aBetRate;
-        this.bBetRate = bBetRate;
-        this.winningSide = winningSide;
+    public Match(MatchData matchData) {
+        this.matchData = matchData;
         bettings = new ArrayList<>();
     }
 
@@ -30,7 +26,7 @@ public class Match {
 
     public void payToPlayers() {
         for (Betting betting : bettings) {
-            new BettingProcessor(getABetRate(), getBBetRate(), getWinningSide()).processBetting(betting);
+            new BettingProcessor(getMatchData()).processBetting(betting);
         }
     }
 }
