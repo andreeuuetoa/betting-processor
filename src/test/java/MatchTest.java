@@ -1,20 +1,32 @@
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MatchTest {
+    private static MatchData sampleMatchDataWithASideWinning;
+    private static MatchData sampleMatchDataWithBSideWinning;
+    private static MatchData sampleMatchDataWithDraw;
+
+    @BeforeAll
+    public static void createSampleMatchData() {
+        sampleMatchDataWithASideWinning = new MatchData(1.3, 0.75, "A");
+        sampleMatchDataWithBSideWinning = new MatchData(1.3, 0.75, "B");
+        sampleMatchDataWithDraw = new MatchData(1.3, 0.75, "DRAW");
+    }
+
     @Test
     public void testCreateSampleMatch() {
-        Match sampleMatch = new Match(1.00, 0.75, "A");
+        Match sampleMatch = new Match(sampleMatchDataWithASideWinning);
 
-        assertEquals(1, sampleMatch.getABetRate());
-        assertEquals(0.75, sampleMatch.getBBetRate());
-        assertEquals("A", sampleMatch.getWinningSide());
+        assertEquals(1.3, sampleMatch.getMatchData().getABetRate());
+        assertEquals(0.75, sampleMatch.getMatchData().getBBetRate());
+        assertEquals("A", sampleMatch.getMatchData().getWinningSide());
     }
 
     @Test
     public void testBettingWasCreatedCorrectlyForMatch() {
-        Match sampleMatch = new Match(1.00, 0.75, "A");
+        Match sampleMatch = new Match(sampleMatchDataWithASideWinning);
         Player player = new Player();
 
         player.deposit(100);
@@ -34,7 +46,7 @@ public class MatchTest {
 
     @Test
     public void testPlayerBetsOnASideAndGetsAProfitOnVictory() {
-        Match sampleMatch = new Match(1.3, 0.75, "A");
+        Match sampleMatch = new Match(sampleMatchDataWithASideWinning);
         Player player = new Player();
 
         player.deposit(100);
@@ -46,7 +58,7 @@ public class MatchTest {
 
     @Test
     public void testPlayerBetsOnBSideAndGetsAProfitOnVictory() {
-        Match sampleMatch = new Match(1.3, 0.75, "B");
+        Match sampleMatch = new Match(sampleMatchDataWithBSideWinning);
         Player player = new Player();
 
         player.deposit(100);
@@ -58,7 +70,7 @@ public class MatchTest {
 
     @Test
     public void testPlayerBetsOnASideAndLosesMoneyOnLoss() {
-        Match sampleMatch = new Match(1.3, 0.75, "B");
+        Match sampleMatch = new Match(sampleMatchDataWithBSideWinning);
         Player player = new Player();
 
         player.deposit(100);
@@ -70,7 +82,7 @@ public class MatchTest {
 
     @Test
     public void testPlayerBetsOnBSideAndLosesMoneyOnLoss() {
-        Match sampleMatch = new Match(1.3, 0.75, "A");
+        Match sampleMatch = new Match(sampleMatchDataWithASideWinning);
         Player player = new Player();
 
         player.deposit(100);
@@ -82,7 +94,7 @@ public class MatchTest {
 
     @Test
     public void testPlayerBetsAndGetsHisBetMoneyBackOnDraw() {
-        Match sampleMatch = new Match(1.3, 0.75, "DRAW");
+        Match sampleMatch = new Match(sampleMatchDataWithDraw);
         Player player = new Player();
 
         player.deposit(100);
