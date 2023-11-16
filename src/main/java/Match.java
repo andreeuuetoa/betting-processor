@@ -37,13 +37,29 @@ public class Match {
     private void processBetting(Betting betting) {
         Player bettingPlayer = betting.getPlayer();
         if (betting.getSide().equals(getWinningSide())) {
-            if (getWinningSide().equals("A")) {
-                bettingPlayer.deposit((int) (betting.getAmount() * aBetRate));
-            } else if (getWinningSide().equals("B")) {
-                bettingPlayer.deposit((int) (betting.getAmount() * bBetRate));
-            }
+            returnMoneyWithProfitToPlayer(betting, bettingPlayer);
         } else if (getWinningSide().equals("DRAW")) {
-            bettingPlayer.deposit(betting.getAmount());
+            returnBetMoneyToPlayer(bettingPlayer, betting.getAmount());
         }
+    }
+
+    private void returnMoneyWithProfitToPlayer(Betting betting, Player bettingPlayer) {
+        if (getWinningSide().equals("A")) {
+            bettingPlayer.deposit(getMoneyWithProfitOnASide(betting));
+        } else if (getWinningSide().equals("B")) {
+            bettingPlayer.deposit(getMoneyWithProfitOnBSide(betting));
+        }
+    }
+
+    private int getMoneyWithProfitOnASide(Betting betting) {
+        return (int) (betting.getAmount() * aBetRate);
+    }
+
+    private int getMoneyWithProfitOnBSide(Betting betting) {
+        return (int) (betting.getAmount() * bBetRate);
+    }
+
+    private void returnBetMoneyToPlayer(Player bettingPlayer, int betting) {
+        bettingPlayer.deposit(betting);
     }
 }
