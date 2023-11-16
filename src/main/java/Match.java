@@ -7,10 +7,10 @@ import java.util.List;
 public class Match {
     private final double aBetRate;
     private final double bBetRate;
-    private final char winningSide;
+    private final String winningSide;
     private List<Betting> bettings;
 
-    public Match(double aBetRate, double bBetRate, char winningSide) {
+    public Match(double aBetRate, double bBetRate, String winningSide) {
         this.aBetRate = aBetRate;
         this.bBetRate = bBetRate;
         this.winningSide = winningSide;
