@@ -61,4 +61,12 @@ public class PlayerBasicOperationsTest {
         player.deposit(30);
         assertThrows(RuntimeException.class, () -> player.betOnMatch(50, match));
     }
+
+    @Test
+    public void testPlayerCanOnlyBetOnceOnAMatch() {
+        Match match = new Match(1, 0.75, 'A');
+        player.deposit(300);
+        player.betOnMatch(100, match);
+        assertThrows(RuntimeException.class, () -> player.betOnMatch(50, match));
+    }
 }

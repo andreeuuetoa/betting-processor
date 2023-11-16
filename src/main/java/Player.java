@@ -22,5 +22,6 @@ public class Player {
 
     public void betOnMatch(int coinsToBet, Match match) {
         withdraw(coinsToBet);
+        match.addPlayer(this);
     }
 }
