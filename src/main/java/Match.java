@@ -42,6 +42,8 @@ public class Match {
             } else if (getWinningSide().equals("B")) {
                 bettingPlayer.deposit((int) (betting.getAmount() * bBetRate));
             }
+        } else if (getWinningSide().equals("DRAW")) {
+            bettingPlayer.deposit(betting.getAmount());
         }
     }
 }

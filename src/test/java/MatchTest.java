@@ -79,4 +79,16 @@ public class MatchTest {
         sampleMatch.payToPlayers();
         assertEquals(70, player.getCoins());
     }
+
+    @Test
+    public void testPlayerBetsAndItsADraw() {
+        Match sampleMatch = new Match(1.3, 0.75, "DRAW");
+        Player player = new Player();
+
+        player.deposit(100);
+        player.betOnMatch(30, sampleMatch, "B");
+
+        sampleMatch.payToPlayers();
+        assertEquals(100, player.getCoins());
+    }
 }
