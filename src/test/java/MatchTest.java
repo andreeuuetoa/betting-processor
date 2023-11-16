@@ -13,7 +13,7 @@ public class MatchTest {
     }
 
     @Test
-    public void testSeeBettingDoneOnAMatch() {
+    public void testCheckBettingDoneOnAMatch() {
         Match sampleMatch = new Match(1.00, 0.75, 'A');
         Player player = new Player();
 
