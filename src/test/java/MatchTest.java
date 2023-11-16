@@ -13,7 +13,7 @@ public class MatchTest {
     }
 
     @Test
-    public void testCheckBettingDoneOnAMatch() {
+    public void testBettingWasCreatedCorrectlyForMatch() {
         Match sampleMatch = new Match(1.00, 0.75, "A");
         Player player = new Player();
 
@@ -33,7 +33,7 @@ public class MatchTest {
     }
 
     @Test
-    public void testPlayerBetsOnASideAndWins() {
+    public void testPlayerBetsOnASideAndGetsAProfitOnVictory() {
         Match sampleMatch = new Match(1.3, 0.75, "A");
         Player player = new Player();
 
@@ -45,7 +45,7 @@ public class MatchTest {
     }
 
     @Test
-    public void testPlayerBetsOnBSideAndWins() {
+    public void testPlayerBetsOnBSideAndGetsAProfitOnVictory() {
         Match sampleMatch = new Match(1.3, 0.75, "B");
         Player player = new Player();
 
@@ -57,7 +57,7 @@ public class MatchTest {
     }
 
     @Test
-    public void testPlayerBetsOnASideAndLoses() {
+    public void testPlayerBetsOnASideAndLosesMoneyOnLoss() {
         Match sampleMatch = new Match(1.3, 0.75, "B");
         Player player = new Player();
 
@@ -69,7 +69,7 @@ public class MatchTest {
     }
 
     @Test
-    public void testPlayerBetsOnBSideAndLoses() {
+    public void testPlayerBetsOnBSideAndLosesMoneyOnLoss() {
         Match sampleMatch = new Match(1.3, 0.75, "A");
         Player player = new Player();
 
@@ -81,7 +81,7 @@ public class MatchTest {
     }
 
     @Test
-    public void testPlayerBetsAndItsADraw() {
+    public void testPlayerBetsAndGetsHisBetMoneyBackOnDraw() {
         Match sampleMatch = new Match(1.3, 0.75, "DRAW");
         Player player = new Player();
 
