@@ -10,9 +10,9 @@ public class MatchTest {
 
     @BeforeAll
     public static void createSampleMatchData() {
-        sampleMatchDataWithASideWinning = new MatchData(1.3, 0.75, "A");
-        sampleMatchDataWithBSideWinning = new MatchData(1.3, 0.75, "B");
-        sampleMatchDataWithDraw = new MatchData(1.3, 0.75, "DRAW");
+        sampleMatchDataWithASideWinning = new MatchData(1.3, 0.75, MatchOutcome.A);
+        sampleMatchDataWithBSideWinning = new MatchData(1.3, 0.75, MatchOutcome.B);
+        sampleMatchDataWithDraw = new MatchData(1.3, 0.75, MatchOutcome.DRAW);
     }
 
     @Test
@@ -21,7 +21,7 @@ public class MatchTest {
 
         assertEquals(1.3, sampleMatch.getMatchData().getABetRate());
         assertEquals(0.75, sampleMatch.getMatchData().getBBetRate());
-        assertEquals("A", sampleMatch.getMatchData().getMatchOutcome());
+        assertEquals(MatchOutcome.A, sampleMatch.getMatchData().getMatchOutcome());
     }
 
     @Test
@@ -30,7 +30,7 @@ public class MatchTest {
         Player player = new Player();
 
         player.deposit(100);
-        player.betOnMatch(30, sampleMatch, "A");
+        player.betOnMatch(30, sampleMatch, BettingSide.A);
 
         assertOneBettingWasCreatedForMatchByPlayerAndIsCorrect(sampleMatch, player);
     }
@@ -50,7 +50,7 @@ public class MatchTest {
         Player player = new Player();
 
         player.deposit(100);
-        player.betOnMatch(30, sampleMatch, "A");
+        player.betOnMatch(30, sampleMatch, BettingSide.A);
 
         sampleMatch.payToPlayers();
         assertEquals(109, player.getCoins());
@@ -62,7 +62,7 @@ public class MatchTest {
         Player player = new Player();
 
         player.deposit(100);
-        player.betOnMatch(30, sampleMatch, "B");
+        player.betOnMatch(30, sampleMatch, BettingSide.B);
 
         sampleMatch.payToPlayers();
         assertEquals(92, player.getCoins());
@@ -74,7 +74,7 @@ public class MatchTest {
         Player player = new Player();
 
         player.deposit(100);
-        player.betOnMatch(30, sampleMatch, "A");
+        player.betOnMatch(30, sampleMatch, BettingSide.A);
 
         sampleMatch.payToPlayers();
         assertEquals(70, player.getCoins());
@@ -86,7 +86,7 @@ public class MatchTest {
         Player player = new Player();
 
         player.deposit(100);
-        player.betOnMatch(30, sampleMatch, "B");
+        player.betOnMatch(30, sampleMatch, BettingSide.B);
 
         sampleMatch.payToPlayers();
         assertEquals(70, player.getCoins());
@@ -98,7 +98,7 @@ public class MatchTest {
         Player player = new Player();
 
         player.deposit(100);
-        player.betOnMatch(30, sampleMatch, "B");
+        player.betOnMatch(30, sampleMatch, BettingSide.B);
 
         sampleMatch.payToPlayers();
         assertEquals(100, player.getCoins());

@@ -8,17 +8,17 @@ public class BettingProcessor {
 
     public void processBetting(Betting betting) {
         Player bettingPlayer = betting.getPlayer();
-        if (betting.getSide().equals(getMatchData().getMatchOutcome())) {
+        if (betting.getSide().toString().equals(getMatchData().getMatchOutcome().toString())) {
             returnMoneyWithProfitToPlayer(betting, bettingPlayer);
-        } else if (getMatchData().getMatchOutcome().equals("DRAW")) {
+        } else if (getMatchData().getMatchOutcome().equals(MatchOutcome.DRAW)) {
             returnBetMoneyToPlayer(bettingPlayer, betting.getAmount());
         }
     }
 
     private void returnMoneyWithProfitToPlayer(Betting betting, Player bettingPlayer) {
-        if (getMatchData().getMatchOutcome().equals("A")) {
+        if (getMatchData().getMatchOutcome().equals(MatchOutcome.A)) {
             bettingPlayer.deposit(getMoneyWithProfitOnASide(betting));
-        } else if (getMatchData().getMatchOutcome().equals("B")) {
+        } else if (getMatchData().getMatchOutcome().equals(MatchOutcome.B)) {
             bettingPlayer.deposit(getMoneyWithProfitOnBSide(betting));
         }
     }

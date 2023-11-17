@@ -6,5 +6,5 @@ import lombok.Getter;
 public class MatchData {
     private final double aBetRate;
     private final double bBetRate;
-    private final String matchOutcome;
+    private final MatchOutcome matchOutcome;
 }

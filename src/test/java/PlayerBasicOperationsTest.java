@@ -16,7 +16,7 @@ public class PlayerBasicOperationsTest {
 
     @BeforeAll
     public static void createSampleMatchData() {
-        sampleMatchData = new MatchData(1.00, 0.75, "A");
+        sampleMatchData = new MatchData(1.00, 0.75, MatchOutcome.A);
     }
 
     @Test
@@ -52,28 +52,28 @@ public class PlayerBasicOperationsTest {
     public void testPlayerBetsOnMatchAndCoinbaseDecreases() {
         player.deposit(100);
         Match match = new Match(sampleMatchData);
-        player.betOnMatch(30, match, "A");
+        player.betOnMatch(30, match, BettingSide.A);
         assertEquals(70, player.getCoins());
     }
 
     @Test
     public void testPlayerCannotBetWithEmptyCoinbase() {
         Match match = new Match(sampleMatchData);
-        assertThrows(RuntimeException.class, () -> player.betOnMatch(50, match, "A"));
+        assertThrows(RuntimeException.class, () -> player.betOnMatch(50, match, BettingSide.A));
     }
 
     @Test
     public void testPlayerCannotBetWithInsufficientCoinbase() {
         Match match = new Match(sampleMatchData);
         player.deposit(30);
-        assertThrows(RuntimeException.class, () -> player.betOnMatch(50, match, "A"));
+        assertThrows(RuntimeException.class, () -> player.betOnMatch(50, match, BettingSide.A));
     }
 
     @Test
     public void testPlayerCanOnlyBetOnceOnAMatch() {
         Match match = new Match(sampleMatchData);
         player.deposit(300);
-        player.betOnMatch(100, match, "A");
-        assertThrows(RuntimeException.class, () -> player.betOnMatch(50, match, "A"));
+        player.betOnMatch(100, match, BettingSide.A);
+        assertThrows(RuntimeException.class, () -> player.betOnMatch(50, match, BettingSide.A));
     }
 }
