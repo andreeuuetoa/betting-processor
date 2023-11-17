@@ -30,8 +30,12 @@ public class Match {
     }
 
     public void payToPlayers() {
+        BettingProcessor bettingProcessorForMatch = new BettingProcessor(getMatchData());
+
         for (Betting betting : bettings) {
-            new BettingProcessor(getMatchData()).processBetting(betting);
+            int moneyGotBack = bettingProcessorForMatch.calculateMoneyGotBackFromBetting(betting);
+            Player player = betting.getPlayer();
+            player.deposit(moneyGotBack);
         }
     }
 }

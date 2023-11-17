@@ -1,10 +1,10 @@
 package bettingprocessor;
 
-import domain.Player;
 import dto.Betting;
 import dto.MatchData;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import util.BettingSide;
 import util.MatchOutcome;
 
 @Getter
@@ -12,21 +12,27 @@ import util.MatchOutcome;
 public class BettingProcessor {
     private MatchData matchData;
 
-    public void processBetting(Betting betting) {
-        Player bettingPlayer = betting.getPlayer();
-        if (betting.getSide().toString().equals(getMatchData().getMatchOutcome().toString())) {
-            returnMoneyWithProfitToPlayer(betting, bettingPlayer);
-        } else if (getMatchData().getMatchOutcome().equals(MatchOutcome.DRAW)) {
-            returnBetMoneyToPlayer(bettingPlayer, betting.getAmount());
+    public int calculateMoneyGotBackFromBetting(Betting betting) {
+        if (isBettingMadeOnWinningA(betting)) {
+            return getMoneyWithProfitOnASide(betting);
+        } else if (isBettingMadeOnWinningB(betting)) {
+            return getMoneyWithProfitOnBSide(betting);
+        } else if (isMatchADraw()) {
+            return betting.getAmount();
         }
+        return 0;
     }
 
-    private void returnMoneyWithProfitToPlayer(Betting betting, Player bettingPlayer) {
-        if (getMatchData().getMatchOutcome().equals(MatchOutcome.A)) {
-            bettingPlayer.deposit(getMoneyWithProfitOnASide(betting));
-        } else if (getMatchData().getMatchOutcome().equals(MatchOutcome.B)) {
-            bettingPlayer.deposit(getMoneyWithProfitOnBSide(betting));
-        }
+    private boolean isBettingMadeOnWinningA(Betting betting) {
+        return betting.getSide().equals(BettingSide.A) && getMatchData().getMatchOutcome().equals(MatchOutcome.A);
+    }
+
+    private boolean isBettingMadeOnWinningB(Betting betting) {
+        return betting.getSide().equals(BettingSide.B) && getMatchData().getMatchOutcome().equals(MatchOutcome.B);
+    }
+
+    private boolean isMatchADraw() {
+        return getMatchData().getMatchOutcome().equals(MatchOutcome.DRAW);
     }
 
     private int getMoneyWithProfitOnASide(Betting betting) {
@@ -35,9 +41,5 @@ public class BettingProcessor {
 
     private int getMoneyWithProfitOnBSide(Betting betting) {
         return (int) (betting.getAmount() * getMatchData().getBBetRate());
-    }
-
-    private void returnBetMoneyToPlayer(Player bettingPlayer, int bettingAmount) {
-        bettingPlayer.deposit(bettingAmount);
     }
 }
