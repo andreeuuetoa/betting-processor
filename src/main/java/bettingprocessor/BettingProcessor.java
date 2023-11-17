@@ -14,9 +14,9 @@ public class BettingProcessor {
 
     public int calculateMoneyGotBackFromBetting(Betting betting) {
         if (isBettingMadeOnWinningA(betting)) {
-            return getMoneyWithProfitOnASide(betting);
+            return getMoneyWithProfitOnASide(betting.getAmount());
         } else if (isBettingMadeOnWinningB(betting)) {
-            return getMoneyWithProfitOnBSide(betting);
+            return getMoneyWithProfitOnBSide(betting.getAmount());
         } else if (isMatchADraw()) {
             return betting.getAmount();
         }
@@ -35,11 +35,11 @@ public class BettingProcessor {
         return getMatchData().getMatchOutcome().equals(MatchOutcome.DRAW);
     }
 
-    private int getMoneyWithProfitOnASide(Betting betting) {
-        return (int) (betting.getAmount() * getMatchData().getABetRate());
+    private int getMoneyWithProfitOnASide(int money) {
+        return (int) (money * getMatchData().getABetRate());
     }
 
-    private int getMoneyWithProfitOnBSide(Betting betting) {
-        return (int) (betting.getAmount() * getMatchData().getBBetRate());
+    private int getMoneyWithProfitOnBSide(int money) {
+        return (int) (money * getMatchData().getBBetRate());
     }
 }
