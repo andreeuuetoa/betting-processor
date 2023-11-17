@@ -1,10 +1,10 @@
 package dto;
 
-import domain.Match;
-import domain.Player;
+import domain.objects.Match;
+import domain.objects.Player;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import util.BettingSide;
+import domain.constants.BettingSide;
 
 @Getter
 @AllArgsConstructor

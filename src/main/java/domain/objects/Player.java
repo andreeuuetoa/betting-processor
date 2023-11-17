@@ -1,7 +1,7 @@
-package domain;
+package domain.objects;
 
 import dto.Betting;
-import util.BettingSide;
+import domain.constants.BettingSide;
 
 public class Player {
     private int coins;

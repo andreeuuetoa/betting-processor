@@ -4,8 +4,8 @@ import dto.Betting;
 import dto.MatchData;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import util.BettingSide;
-import util.MatchOutcome;
+import domain.constants.BettingSide;
+import domain.constants.MatchOutcome;
 
 @Getter
 @AllArgsConstructor

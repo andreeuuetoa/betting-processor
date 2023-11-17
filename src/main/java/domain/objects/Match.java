@@ -1,4 +1,4 @@
-package domain;
+package domain.objects;
 
 import bettingprocessor.BettingProcessor;
 import dto.Betting;

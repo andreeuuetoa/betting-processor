@@ -2,7 +2,7 @@ package dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import util.MatchOutcome;
+import domain.constants.MatchOutcome;
 
 @Getter
 @AllArgsConstructor
