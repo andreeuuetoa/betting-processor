@@ -29,13 +29,17 @@ public class Match {
         return bettings.stream().map(Betting::getPlayer).toList().contains(player);
     }
 
-    public void payToPlayers() {
+    public int payToPlayersAndCalculateCasinoProfit() {
         BettingProcessor bettingProcessorForMatch = new BettingProcessor(getMatchData());
+        int casinoProfit = 0;
 
         for (Betting betting : bettings) {
             int moneyGotBack = bettingProcessorForMatch.calculateMoneyGotBackFromBetting(betting);
             Player player = betting.getPlayer();
             player.deposit(moneyGotBack);
+            casinoProfit -= moneyGotBack - betting.getAmount();
         }
+
+        return casinoProfit;
     }
 }

@@ -19,4 +19,10 @@ public class Casino {
         matches.add(match);
     }
 
+    public void playMatches() {
+        for (Match match : matches) {
+            int casinoProfitOnMatch = match.payToPlayersAndCalculateCasinoProfit();
+            balance += casinoProfitOnMatch;
+        }
+    }
 }

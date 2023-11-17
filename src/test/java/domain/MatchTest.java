@@ -57,7 +57,7 @@ public class MatchTest {
 
         player.deposit(100);
         player.betOnMatch(30, sampleMatch, BettingSide.A);
-        sampleMatch.payToPlayers();
+        sampleMatch.payToPlayersAndCalculateCasinoProfit();
 
         assertEquals(109, player.getCoins());
     }
@@ -69,7 +69,7 @@ public class MatchTest {
 
         player.deposit(100);
         player.betOnMatch(30, sampleMatch, BettingSide.B);
-        sampleMatch.payToPlayers();
+        sampleMatch.payToPlayersAndCalculateCasinoProfit();
 
         assertEquals(92, player.getCoins());
     }
@@ -81,7 +81,7 @@ public class MatchTest {
 
         player.deposit(100);
         player.betOnMatch(30, sampleMatch, BettingSide.A);
-        sampleMatch.payToPlayers();
+        sampleMatch.payToPlayersAndCalculateCasinoProfit();
 
         assertEquals(70, player.getCoins());
     }
@@ -93,7 +93,7 @@ public class MatchTest {
 
         player.deposit(100);
         player.betOnMatch(30, sampleMatch, BettingSide.B);
-        sampleMatch.payToPlayers();
+        sampleMatch.payToPlayersAndCalculateCasinoProfit();
 
         assertEquals(70, player.getCoins());
     }
@@ -105,7 +105,7 @@ public class MatchTest {
 
         player.deposit(100);
         player.betOnMatch(30, sampleMatch, BettingSide.B);
-        sampleMatch.payToPlayers();
+        sampleMatch.payToPlayersAndCalculateCasinoProfit();
 
         assertEquals(100, player.getCoins());
     }
@@ -120,7 +120,7 @@ public class MatchTest {
         playerTwo.deposit(100);
         playerOne.betOnMatch(30, sampleMatch, BettingSide.A);
         playerTwo.betOnMatch(30, sampleMatch, BettingSide.B);
-        sampleMatch.payToPlayers();
+        sampleMatch.payToPlayersAndCalculateCasinoProfit();
 
         assertEquals(2, sampleMatch.getBettings().size());
         assertEquals(109, playerOne.getCoins());
