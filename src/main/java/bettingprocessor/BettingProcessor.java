@@ -37,7 +37,7 @@ public class BettingProcessor {
         return (int) (betting.getAmount() * getMatchData().getBBetRate());
     }
 
-    private void returnBetMoneyToPlayer(Player bettingPlayer, int betting) {
-        bettingPlayer.deposit(betting);
+    private void returnBetMoneyToPlayer(Player bettingPlayer, int bettingAmount) {
+        bettingPlayer.deposit(bettingAmount);
     }
 }
