@@ -1,5 +1,11 @@
+package bettingprocessor;
+
+import domain.Player;
+import dto.Betting;
+import dto.MatchData;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import util.MatchOutcome;
 
 @Getter
 @AllArgsConstructor

@@ -1,5 +1,8 @@
+package dto;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import util.MatchOutcome;
 
 @Getter
 @AllArgsConstructor
