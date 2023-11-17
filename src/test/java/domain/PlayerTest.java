@@ -10,7 +10,7 @@ import util.MatchOutcome;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class PlayerBasicOperationsTest {
+public class PlayerTest {
     private Player player;
     private static MatchData sampleMatchData;
 
