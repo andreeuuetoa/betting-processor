@@ -6,16 +6,20 @@ import dto.MatchData;
 import lombok.Getter;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 public class Match {
     private MatchData matchData;
     private List<Betting> bettings;
+    private Set<Player> illegalPlayers;
 
     public Match(MatchData matchData) {
         this.matchData = matchData;
         bettings = new ArrayList<>();
+        illegalPlayers = new HashSet<>();
     }
 
     public void addBetting(Betting betting) {
@@ -34,12 +38,18 @@ public class Match {
         int casinoProfit = 0;
 
         for (Betting betting : bettings) {
-            int moneyGotBack = bettingProcessorForMatch.calculateMoneyGotBackFromBetting(betting);
-            Player player = betting.getPlayer();
-            player.deposit(moneyGotBack);
-            casinoProfit -= moneyGotBack - betting.getAmount();
+            if (!illegalPlayers.contains(betting.getPlayer())) {
+                int moneyGotBack = bettingProcessorForMatch.calculateMoneyGotBackFromBetting(betting);
+                Player player = betting.getPlayer();
+                player.deposit(moneyGotBack);
+                casinoProfit -= moneyGotBack - betting.getAmount();
+            }
         }
 
         return casinoProfit;
+    }
+
+    public void addIllegalPlayer(Player player) {
+        illegalPlayers.add(player);
     }
 }

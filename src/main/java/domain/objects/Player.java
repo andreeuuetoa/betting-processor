@@ -26,8 +26,12 @@ public class Player {
     }
 
     public void betOnMatch(int coinsToBet, Match match, BettingSide side) {
-        withdraw(coinsToBet);
-        Betting playerBetting = new Betting(this, match, coinsToBet, side);
-        match.addBetting(playerBetting);
+        try {
+            Betting playerBetting = new Betting(this, match, coinsToBet, side);
+            match.addBetting(playerBetting);
+            withdraw(coinsToBet);
+        } catch (Exception e) {
+            match.addIllegalPlayer(this);
+        }
     }
 }

@@ -98,4 +98,29 @@ public class CasinoTest {
 
         assertEquals(0, casino.getBalance());
     }
+
+    @Test
+    public void testIllegalMoveByPlayerDoesNotImpactCasinoBalance() {
+        Match match = new Match(sampleMatchDataWithASideWinning);
+        player.deposit(100);
+        player.betOnMatch(150, match, BettingSide.A);
+
+        casino.addMatch(match);
+        casino.playMatches();
+
+        assertEquals(0, casino.getBalance());
+    }
+
+    @Test
+    public void testLegalMoveAndThenAnIllegalMoveDoesNotImpactCasinoBalance() {
+        Match match = new Match(sampleMatchDataWithASideWinning);
+        player.deposit(100);
+        player.betOnMatch(50, match, BettingSide.A);
+        player.betOnMatch(100, match, BettingSide.A);
+
+        casino.addMatch(match);
+        casino.playMatches();
+
+        assertEquals(0, casino.getBalance());
+    }
 }

@@ -9,8 +9,7 @@ import org.junit.jupiter.api.Test;
 import domain.constants.BettingSide;
 import domain.constants.MatchOutcome;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerTest {
     private Player player;
@@ -64,23 +63,26 @@ public class PlayerTest {
     }
 
     @Test
-    public void testPlayerCannotBetWithEmptyCoinbase() {
+    public void testPlayerBetsWithEmptyCoinbaseAndCoinbaseRemainsConstant() {
         Match match = new Match(sampleMatchData);
-        assertThrows(RuntimeException.class, () -> player.betOnMatch(50, match, BettingSide.A));
+        player.betOnMatch(50, match, BettingSide.A);
+        assertEquals(0, player.getCoins());
     }
 
     @Test
-    public void testPlayerCannotBetWithInsufficientCoinbase() {
+    public void testPlayerBetsWithInsufficientCoinbaseAndCoinbaseRemainsConstant() {
         Match match = new Match(sampleMatchData);
         player.deposit(30);
-        assertThrows(RuntimeException.class, () -> player.betOnMatch(50, match, BettingSide.A));
+        player.betOnMatch(50, match, BettingSide.A);
+        assertEquals(30, player.getCoins());
     }
 
     @Test
-    public void testPlayerCanOnlyBetOnceOnAMatch() {
+    public void testPlayerBetsTwiceOnAMatchAndCoinbaseRemainsConstant() {
         Match match = new Match(sampleMatchData);
         player.deposit(300);
         player.betOnMatch(100, match, BettingSide.A);
-        assertThrows(RuntimeException.class, () -> player.betOnMatch(50, match, BettingSide.A));
+        player.betOnMatch(50, match, BettingSide.A);
+        assertEquals(200, player.getCoins());
     }
 }

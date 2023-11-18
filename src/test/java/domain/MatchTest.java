@@ -10,6 +10,7 @@ import domain.constants.BettingSide;
 import domain.constants.MatchOutcome;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MatchTest {
     private static MatchData sampleMatchDataWithASideWinning;
@@ -127,5 +128,17 @@ public class MatchTest {
         assertEquals(2, match.getBettings().size());
         assertEquals(109, playerOne.getCoins());
         assertEquals(70, playerTwo.getCoins());
+    }
+
+    @Test
+    public void testPlayerBetsAndIsConsideredIllegal() {
+        Match match = new Match(sampleMatchDataWithASideWinning);
+        Player player = new Player();
+
+        player.deposit(100);
+        player.betOnMatch(150, match, BettingSide.A);
+        match.payToPlayersAndCalculateCasinoProfit();
+
+        assertTrue(match.getIllegalPlayers().contains(player));
     }
 }
