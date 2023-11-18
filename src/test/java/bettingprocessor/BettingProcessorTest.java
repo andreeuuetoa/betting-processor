@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import domain.constants.BettingSide;
 import domain.constants.MatchOutcome;
 import util.objectgenerators.MatchGenerator;
+import util.objectgenerators.PlayerGenerator;
 
 import java.util.UUID;
 
@@ -23,7 +24,7 @@ public class BettingProcessorTest {
 
     @BeforeEach
     public void createNewPlayer() {
-        player = new Player(UUID.randomUUID());
+        player = PlayerGenerator.generatePlayerWithRandomID();
     }
 
     @BeforeAll

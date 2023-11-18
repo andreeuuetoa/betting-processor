@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import domain.constants.BettingSide;
 import domain.constants.MatchOutcome;
 import util.objectgenerators.MatchGenerator;
+import util.objectgenerators.PlayerGenerator;
 
 import java.util.UUID;
 
@@ -39,7 +40,7 @@ public class MatchTest {
     @Test
     public void testBettingWasCreatedCorrectlyForMatch() {
         Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning);
-        Player player = new Player(UUID.randomUUID());
+        Player player = PlayerGenerator.generatePlayerWithRandomID();
 
         player.deposit(100);
         player.betOnMatch(30, match, BettingSide.A);
@@ -59,7 +60,7 @@ public class MatchTest {
     @Test
     public void testPlayerBetsOnASideAndGetsAProfitOnVictory() {
         Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning);
-        Player player = new Player(UUID.randomUUID());
+        Player player = PlayerGenerator.generatePlayerWithRandomID();
 
         player.deposit(100);
         player.betOnMatch(30, match, BettingSide.A);
@@ -72,7 +73,7 @@ public class MatchTest {
     @Test
     public void testPlayerBetsOnBSideAndGetsAProfitOnVictory() {
         Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithBSideWinning);
-        Player player = new Player(UUID.randomUUID());
+        Player player = PlayerGenerator.generatePlayerWithRandomID();
 
         player.deposit(100);
         player.betOnMatch(30, match, BettingSide.B);
@@ -85,7 +86,7 @@ public class MatchTest {
     @Test
     public void testPlayerBetsOnASideAndLosesMoneyOnLoss() {
         Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithBSideWinning);
-        Player player = new Player(UUID.randomUUID());
+        Player player = PlayerGenerator.generatePlayerWithRandomID();
 
         player.deposit(100);
         player.betOnMatch(30, match, BettingSide.A);
@@ -98,7 +99,7 @@ public class MatchTest {
     @Test
     public void testPlayerBetsOnBSideAndLosesMoneyOnLoss() {
         Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning);
-        Player player = new Player(UUID.randomUUID());
+        Player player = PlayerGenerator.generatePlayerWithRandomID();
 
         player.deposit(100);
         player.betOnMatch(30, match, BettingSide.B);
@@ -111,7 +112,7 @@ public class MatchTest {
     @Test
     public void testPlayerBetsAndGetsHisBetMoneyBackOnDraw() {
         Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithDraw);
-        Player player = new Player(UUID.randomUUID());
+        Player player = PlayerGenerator.generatePlayerWithRandomID();
 
         player.deposit(100);
         player.betOnMatch(30, match, BettingSide.B);
@@ -124,8 +125,8 @@ public class MatchTest {
     @Test
     public void testManyPlayersBetOnAMatch() {
         Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning);
-        Player playerOne = new Player(UUID.randomUUID());
-        Player playerTwo = new Player(UUID.randomUUID());
+        Player playerOne = PlayerGenerator.generatePlayerWithRandomID();
+        Player playerTwo = PlayerGenerator.generatePlayerWithRandomID();
 
         playerOne.deposit(100);
         playerTwo.deposit(100);
@@ -142,7 +143,7 @@ public class MatchTest {
     @Test
     public void testPlayerBetsAndIsConsideredIllegal() {
         Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning);
-        Player player = new Player(UUID.randomUUID());
+        Player player = PlayerGenerator.generatePlayerWithRandomID();
 
         player.deposit(100);
         player.betOnMatch(150, match, BettingSide.A);
