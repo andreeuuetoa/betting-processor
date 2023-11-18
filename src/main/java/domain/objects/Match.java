@@ -33,20 +33,30 @@ public class Match {
         return bettings.stream().map(Betting::getPlayer).toList().contains(player);
     }
 
-    public int payToPlayersAndCalculateCasinoProfit() {
+    public int calculateCasinoProfit() {
         BettingProcessor bettingProcessorForMatch = new BettingProcessor(getMatchData());
         int casinoProfit = 0;
 
         for (Betting betting : bettings) {
             if (!illegalPlayers.contains(betting.getPlayer())) {
                 int moneyGotBack = bettingProcessorForMatch.calculateMoneyGotBackFromBetting(betting);
-                Player player = betting.getPlayer();
-                player.deposit(moneyGotBack);
                 casinoProfit -= moneyGotBack - betting.getAmount();
             }
         }
 
         return casinoProfit;
+    }
+
+    public void payToPlayers() {
+        BettingProcessor bettingProcessorForMatch = new BettingProcessor(getMatchData());
+
+        for (Betting betting : bettings) {
+            if (!illegalPlayers.contains(betting.getPlayer())) {
+                int moneyGotBack = bettingProcessorForMatch.calculateMoneyGotBackFromBetting(betting);
+                Player player = betting.getPlayer();
+                player.deposit(moneyGotBack);
+            }
+        }
     }
 
     public void addIllegalPlayer(Player player) {

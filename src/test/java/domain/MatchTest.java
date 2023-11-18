@@ -60,7 +60,8 @@ public class MatchTest {
 
         player.deposit(100);
         player.betOnMatch(30, match, BettingSide.A);
-        match.payToPlayersAndCalculateCasinoProfit();
+        match.calculateCasinoProfit();
+        match.payToPlayers();
 
         assertEquals(109, player.getCoins());
     }
@@ -72,7 +73,8 @@ public class MatchTest {
 
         player.deposit(100);
         player.betOnMatch(30, match, BettingSide.B);
-        match.payToPlayersAndCalculateCasinoProfit();
+        match.calculateCasinoProfit();
+        match.payToPlayers();
 
         assertEquals(92, player.getCoins());
     }
@@ -84,7 +86,8 @@ public class MatchTest {
 
         player.deposit(100);
         player.betOnMatch(30, match, BettingSide.A);
-        match.payToPlayersAndCalculateCasinoProfit();
+        match.calculateCasinoProfit();
+        match.payToPlayers();
 
         assertEquals(70, player.getCoins());
     }
@@ -96,7 +99,8 @@ public class MatchTest {
 
         player.deposit(100);
         player.betOnMatch(30, match, BettingSide.B);
-        match.payToPlayersAndCalculateCasinoProfit();
+        match.calculateCasinoProfit();
+        match.payToPlayers();
 
         assertEquals(70, player.getCoins());
     }
@@ -108,7 +112,8 @@ public class MatchTest {
 
         player.deposit(100);
         player.betOnMatch(30, match, BettingSide.B);
-        match.payToPlayersAndCalculateCasinoProfit();
+        match.calculateCasinoProfit();
+        match.payToPlayers();
 
         assertEquals(100, player.getCoins());
     }
@@ -123,7 +128,8 @@ public class MatchTest {
         playerTwo.deposit(100);
         playerOne.betOnMatch(30, match, BettingSide.A);
         playerTwo.betOnMatch(30, match, BettingSide.B);
-        match.payToPlayersAndCalculateCasinoProfit();
+        match.calculateCasinoProfit();
+        match.payToPlayers();
 
         assertEquals(2, match.getBettings().size());
         assertEquals(109, playerOne.getCoins());
@@ -137,7 +143,8 @@ public class MatchTest {
 
         player.deposit(100);
         player.betOnMatch(150, match, BettingSide.A);
-        match.payToPlayersAndCalculateCasinoProfit();
+        match.calculateCasinoProfit();
+        match.payToPlayers();
 
         assertTrue(match.getIllegalPlayers().contains(player));
     }
