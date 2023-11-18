@@ -11,8 +11,7 @@ import domain.constants.MatchOutcome;
 import util.MatchGenerator;
 import util.PlayerGenerator;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MatchTest {
     private static MatchData sampleMatchDataWithASideWinning;
@@ -30,6 +29,7 @@ public class MatchTest {
     public void testCreateSampleMatch() {
         Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning);
 
+        assertNotNull(match.getId());
         assertEquals(1.3, match.getMatchData().getABetRate());
         assertEquals(0.75, match.getMatchData().getBBetRate());
         assertEquals(MatchOutcome.A, match.getMatchData().getMatchOutcome());
