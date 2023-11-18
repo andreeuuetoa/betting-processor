@@ -2,7 +2,6 @@ package util.files;
 
 import domain.constants.BettingSide;
 import domain.constants.PlayerActionType;
-import domain.objects.Match;
 import dto.PlayerAction;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PlayerActionDataFileReaderTest {
     @Test
     public void testDepositPlayerActionDataFileExistsAndContainsData() {
-        Path path = Paths.get("src", "test", "resources", "one_player_deposit_data.txt");
+        Path path = Paths.get("src", "test", "resources", "playerdata", "one_player_deposit_data.txt");
         String oneMatchData = "163f23ed-e9a9-4e54-a5b1-4e1fc86f12f4,DEPOSIT,,4000,";
         assertDoesNotThrow(() -> {Files.newBufferedReader(path);});
         try (BufferedReader reader = Files.newBufferedReader(path)) {
@@ -31,7 +30,7 @@ public class PlayerActionDataFileReaderTest {
 
     @Test
     public void testWithdrawPlayerActionDataFileExistsAndContainsData() {
-        Path path = Paths.get("src", "test", "resources", "one_player_withdraw_data.txt");
+        Path path = Paths.get("src", "test", "resources", "playerdata", "one_player_withdraw_data.txt");
         String oneMatchData = "163f23ed-e9a9-4e54-a5b1-4e1fc86f12f4,WITHDRAW,,200,";
         assertDoesNotThrow(() -> {Files.newBufferedReader(path);});
         try (BufferedReader reader = Files.newBufferedReader(path)) {
@@ -44,7 +43,7 @@ public class PlayerActionDataFileReaderTest {
 
     @Test
     public void testBetPlayerActionDataFileExistsAndContainsData() {
-        Path path = Paths.get("src", "test", "resources", "one_player_bet_data.txt");
+        Path path = Paths.get("src", "test", "resources", "playerdata", "one_player_bet_data.txt");
         String oneMatchData = "163f23ed-e9a9-4e54-a5b1-4e1fc86f12f4,BET,abae2255-4255-4304-8589-737cdff61640,500,A";
         assertDoesNotThrow(() -> {Files.newBufferedReader(path);});
         try (BufferedReader reader = Files.newBufferedReader(path)) {
@@ -57,7 +56,7 @@ public class PlayerActionDataFileReaderTest {
 
     @Test
     public void testCreateDepositPlayerActionFromPlayerData() {
-        Path path = Paths.get("src", "test", "resources", "one_player_deposit_data.txt");
+        Path path = Paths.get("src", "test", "resources", "playerdata", "one_player_deposit_data.txt");
         List<PlayerAction> playerActions = PlayerActionDataFileReader.createPlayerActionsFromFileInPath(path);
         assertEquals(1, playerActions.size());
         PlayerAction playerAction = playerActions.get(0);
@@ -74,7 +73,7 @@ public class PlayerActionDataFileReaderTest {
 
     @Test
     public void testCreateWithdrawPlayerActionFromPlayerData() {
-        Path path = Paths.get("src", "test", "resources", "one_player_withdraw_data.txt");
+        Path path = Paths.get("src", "test", "resources", "playerdata", "one_player_withdraw_data.txt");
         List<PlayerAction> playerActions = PlayerActionDataFileReader.createPlayerActionsFromFileInPath(path);
         assertEquals(1, playerActions.size());
         PlayerAction playerAction = playerActions.get(0);
@@ -91,7 +90,7 @@ public class PlayerActionDataFileReaderTest {
 
     @Test
     public void testCreateBetPlayerActionFromPlayerData() {
-        Path path = Paths.get("src", "test", "resources", "one_player_bet_data.txt");
+        Path path = Paths.get("src", "test", "resources", "playerdata", "one_player_bet_data.txt");
         List<PlayerAction> playerActions = PlayerActionDataFileReader.createPlayerActionsFromFileInPath(path);
         assertEquals(1, playerActions.size());
         PlayerAction playerAction = playerActions.get(0);
@@ -108,7 +107,7 @@ public class PlayerActionDataFileReaderTest {
 
     @Test
     public void testCreatePlayersFromGivenPlayerActionData() {
-        Path path = Paths.get("src", "test", "resources", "player_data.txt");
+        Path path = Paths.get("src", "test", "resources", "playerdata", "player_data.txt");
         List<PlayerAction> playerActions = PlayerActionDataFileReader.createPlayerActionsFromFileInPath(path);
         assertEquals(19, playerActions.size());
     }
