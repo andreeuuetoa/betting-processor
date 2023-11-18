@@ -5,6 +5,7 @@ import domain.objects.Player;
 import dto.Betting;
 import dto.MatchData;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import domain.constants.BettingSide;
 import domain.constants.MatchOutcome;
@@ -15,6 +16,12 @@ public class BettingProcessorTest {
     private static MatchData sampleMatchDataWithASideWinning;
     private static MatchData sampleMatchDataWithBSideWinning;
     private static MatchData sampleMatchDataWithDraw;
+    private Player player;
+
+    @BeforeEach
+    public void createNewPlayer() {
+        player = new Player();
+    }
 
     @BeforeAll
     public static void createSampleMatchData() {
@@ -26,7 +33,6 @@ public class BettingProcessorTest {
     @Test
     public void testPlayerBetsOnASideAndGetsAProfitOnVictory() {
         Match sampleMatch = new Match(sampleMatchDataWithASideWinning);
-        Player player = new Player();
         player.deposit(100);
         Betting betting = new Betting(player, sampleMatch, 30, BettingSide.A);
 
@@ -39,7 +45,6 @@ public class BettingProcessorTest {
     @Test
     public void testPlayerBetsOnBSideAndGetsAProfitOnVictory() {
         Match sampleMatch = new Match(sampleMatchDataWithBSideWinning);
-        Player player = new Player();
         player.deposit(100);
         Betting betting = new Betting(player, sampleMatch, 30, BettingSide.B);
 
@@ -52,7 +57,6 @@ public class BettingProcessorTest {
     @Test
     public void testPlayerBetsOnASideAndLosesMoneyOnLoss() {
         Match sampleMatch = new Match(sampleMatchDataWithBSideWinning);
-        Player player = new Player();
         player.deposit(100);
         Betting betting = new Betting(player, sampleMatch, 30, BettingSide.A);
 
@@ -65,7 +69,6 @@ public class BettingProcessorTest {
     @Test
     public void testPlayerBetsOnBSideAndLosesMoneyOnLoss() {
         Match sampleMatch = new Match(sampleMatchDataWithASideWinning);
-        Player player = new Player();
         player.deposit(100);
         Betting betting = new Betting(player, sampleMatch, 30, BettingSide.B);
 
@@ -78,7 +81,6 @@ public class BettingProcessorTest {
     @Test
     public void testPlayerBetsAndGetsHisBetMoneyBackOnDraw() {
         Match sampleMatch = new Match(sampleMatchDataWithDraw);
-        Player player = new Player();
         player.deposit(100);
         Betting betting = new Betting(player, sampleMatch, 30, BettingSide.B);
 

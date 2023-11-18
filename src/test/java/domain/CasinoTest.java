@@ -5,6 +5,7 @@ import domain.objects.Match;
 import domain.objects.Player;
 import dto.MatchData;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import domain.constants.BettingSide;
 import domain.constants.MatchOutcome;
@@ -16,6 +17,15 @@ public class CasinoTest {
     private static MatchData sampleMatchDataWithBSideWinning;
     private static MatchData sampleMatchDataWithDraw;
 
+    private Casino casino;
+    private Player player;
+
+    @BeforeEach
+    public void createNewCasino() {
+        casino = new Casino();
+        player = new Player();
+    }
+
     @BeforeAll
     public static void createSampleMatchData() {
         sampleMatchDataWithASideWinning = new MatchData(1.3, 0.75, MatchOutcome.A);
@@ -25,13 +35,11 @@ public class CasinoTest {
 
     @Test
     public void testCasinoInitialBalanceIsZero() {
-        Casino casino = new Casino();
         assertEquals(0, casino.getBalance());
     }
 
     @Test
     public void testCasinoCanHostMatches() {
-        Casino casino = new Casino();
         Match matchOne = new Match(sampleMatchDataWithASideWinning);
         Match matchTwo = new Match(sampleMatchDataWithBSideWinning);
         Match matchThree = new Match(sampleMatchDataWithDraw);
@@ -45,9 +53,7 @@ public class CasinoTest {
 
     @Test
     public void testCasinoPlaysOneMatchWithOnePlayerAndPlayerGetsMoney() {
-        Casino casino = new Casino();
         Match match = new Match(sampleMatchDataWithASideWinning);
-        Player player = new Player();
         player.deposit(100);
         player.betOnMatch(50, match, BettingSide.A);
 
@@ -59,9 +65,7 @@ public class CasinoTest {
 
     @Test
     public void testCasinoPlaysOneMatchWithOnePlayerAndCasinoLosesMoney() {
-        Casino casino = new Casino();
         Match match = new Match(sampleMatchDataWithASideWinning);
-        Player player = new Player();
         player.deposit(100);
         player.betOnMatch(50, match, BettingSide.A);
 
@@ -73,9 +77,7 @@ public class CasinoTest {
 
     @Test
     public void testCasinoPlaysOneMatchWithOnePlayerAndCasinoGetsAProfit() {
-        Casino casino = new Casino();
         Match match = new Match(sampleMatchDataWithBSideWinning);
-        Player player = new Player();
         player.deposit(100);
         player.betOnMatch(50, match, BettingSide.A);
 
@@ -87,9 +89,7 @@ public class CasinoTest {
 
     @Test
     public void testCasinoPlaysOneMatchWithOnePlayerAndCasinoBalanceStaysConstant() {
-        Casino casino = new Casino();
         Match match = new Match(sampleMatchDataWithDraw);
-        Player player = new Player();
         player.deposit(100);
         player.betOnMatch(50, match, BettingSide.A);
 
