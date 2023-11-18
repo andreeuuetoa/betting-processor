@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import domain.constants.BettingSide;
 import domain.constants.MatchOutcome;
+import util.objectgenerators.MatchGenerator;
 
 import java.util.UUID;
 
@@ -59,21 +60,21 @@ public class PlayerTest {
     @Test
     public void testPlayerBetsOnMatchAndCoinbaseDecreases() {
         player.deposit(100);
-        Match match = new Match(UUID.randomUUID(), sampleMatchData);
+        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchData);
         player.betOnMatch(30, match, BettingSide.A);
         assertEquals(70, player.getCoins());
     }
 
     @Test
     public void testPlayerBetsWithEmptyCoinbaseAndCoinbaseRemainsConstant() {
-        Match match = new Match(UUID.randomUUID(), sampleMatchData);
+        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchData);
         player.betOnMatch(50, match, BettingSide.A);
         assertEquals(0, player.getCoins());
     }
 
     @Test
     public void testPlayerBetsWithInsufficientCoinbaseAndCoinbaseRemainsConstant() {
-        Match match = new Match(UUID.randomUUID(), sampleMatchData);
+        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchData);
         player.deposit(30);
         player.betOnMatch(50, match, BettingSide.A);
         assertEquals(30, player.getCoins());
@@ -81,7 +82,7 @@ public class PlayerTest {
 
     @Test
     public void testPlayerBetsTwiceOnAMatchAndCoinbaseRemainsConstant() {
-        Match match = new Match(UUID.randomUUID(), sampleMatchData);
+        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchData);
         player.deposit(300);
         player.betOnMatch(100, match, BettingSide.A);
         player.betOnMatch(50, match, BettingSide.A);
