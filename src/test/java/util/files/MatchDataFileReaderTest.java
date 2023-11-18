@@ -3,15 +3,31 @@ package util.files;
 import domain.constants.MatchOutcome;
 import domain.objects.Match;
 import org.junit.jupiter.api.Test;
-import util.files.MatchDataFileReader;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MatchDataFileReaderTest {
+    @Test
+    public void testOneMatchDataFileExistsAndContainsData() {
+        Path path = Paths.get("src", "test", "resources", "one_match_data.txt");
+        String oneMatchData = "abae2255-4255-4304-8589-737cdff61640,1.45,0.75,A";
+        assertDoesNotThrow(() -> {Files.newBufferedReader(path);});
+        try (BufferedReader reader = Files.newBufferedReader(path)) {
+            String line = reader.readLine();
+            assertEquals(oneMatchData, line);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Test
     public void testCreateMatchFromMatchDataWithOneRow() {
         Path path = Paths.get("src", "test", "resources", "one_match_data.txt");
