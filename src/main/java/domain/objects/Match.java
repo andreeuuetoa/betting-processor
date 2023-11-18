@@ -5,18 +5,17 @@ import dto.Betting;
 import dto.MatchData;
 import lombok.Getter;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 public class Match {
+    private final UUID id;
     private MatchData matchData;
     private List<Betting> bettings;
     private Set<Player> illegalPlayers;
 
-    public Match(MatchData matchData) {
+    public Match(UUID id, MatchData matchData) {
+        this.id = id;
         this.matchData = matchData;
         bettings = new ArrayList<>();
         illegalPlayers = new HashSet<>();

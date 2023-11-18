@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import domain.constants.BettingSide;
 import domain.constants.MatchOutcome;
 
+import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CasinoTest {
@@ -23,7 +25,7 @@ public class CasinoTest {
     @BeforeEach
     public void createNewCasino() {
         casino = new Casino();
-        player = new Player();
+        player = new Player(UUID.randomUUID());
     }
 
     @BeforeAll
@@ -40,9 +42,9 @@ public class CasinoTest {
 
     @Test
     public void testCasinoCanHostMatches() {
-        Match matchOne = new Match(sampleMatchDataWithASideWinning);
-        Match matchTwo = new Match(sampleMatchDataWithBSideWinning);
-        Match matchThree = new Match(sampleMatchDataWithDraw);
+        Match matchOne = new Match(UUID.randomUUID(), sampleMatchDataWithASideWinning);
+        Match matchTwo = new Match(UUID.randomUUID(), sampleMatchDataWithBSideWinning);
+        Match matchThree = new Match(UUID.randomUUID(), sampleMatchDataWithDraw);
 
         casino.addMatch(matchOne);
         casino.addMatch(matchTwo);
@@ -53,7 +55,7 @@ public class CasinoTest {
 
     @Test
     public void testCasinoPlaysOneMatchWithOnePlayerAndPlayerGetsMoney() {
-        Match match = new Match(sampleMatchDataWithASideWinning);
+        Match match = new Match(UUID.randomUUID(), sampleMatchDataWithASideWinning);
         player.deposit(100);
         player.betOnMatch(50, match, BettingSide.A);
 
@@ -65,7 +67,7 @@ public class CasinoTest {
 
     @Test
     public void testCasinoPlaysOneMatchWithOnePlayerAndCasinoLosesMoney() {
-        Match match = new Match(sampleMatchDataWithASideWinning);
+        Match match = new Match(UUID.randomUUID(), sampleMatchDataWithASideWinning);
         player.deposit(100);
         player.betOnMatch(50, match, BettingSide.A);
 
@@ -77,7 +79,7 @@ public class CasinoTest {
 
     @Test
     public void testCasinoPlaysOneMatchWithOnePlayerAndCasinoGetsAProfit() {
-        Match match = new Match(sampleMatchDataWithBSideWinning);
+        Match match = new Match(UUID.randomUUID(), sampleMatchDataWithBSideWinning);
         player.deposit(100);
         player.betOnMatch(50, match, BettingSide.A);
 
@@ -89,7 +91,7 @@ public class CasinoTest {
 
     @Test
     public void testCasinoPlaysOneMatchWithOnePlayerAndCasinoBalanceStaysConstant() {
-        Match match = new Match(sampleMatchDataWithDraw);
+        Match match = new Match(UUID.randomUUID(), sampleMatchDataWithDraw);
         player.deposit(100);
         player.betOnMatch(50, match, BettingSide.A);
 
@@ -101,7 +103,7 @@ public class CasinoTest {
 
     @Test
     public void testIllegalMoveByPlayerDoesNotImpactCasinoBalance() {
-        Match match = new Match(sampleMatchDataWithASideWinning);
+        Match match = new Match(UUID.randomUUID(), sampleMatchDataWithASideWinning);
         player.deposit(100);
         player.betOnMatch(150, match, BettingSide.A);
 
@@ -113,7 +115,7 @@ public class CasinoTest {
 
     @Test
     public void testLegalMoveAndThenAnIllegalMoveDoesNotImpactCasinoBalance() {
-        Match match = new Match(sampleMatchDataWithASideWinning);
+        Match match = new Match(UUID.randomUUID(), sampleMatchDataWithASideWinning);
         player.deposit(100);
         player.betOnMatch(50, match, BettingSide.A);
         player.betOnMatch(100, match, BettingSide.A);

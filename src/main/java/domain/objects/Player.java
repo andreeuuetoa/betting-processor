@@ -3,11 +3,19 @@ package domain.objects;
 import dto.Betting;
 import domain.constants.BettingSide;
 
+import java.util.UUID;
+
 public class Player {
+    private final UUID id;
     private int coins;
 
-    public Player() {
+    public Player(UUID id) {
+        this.id = id;
         coins = 0;
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     public int getCoins() {

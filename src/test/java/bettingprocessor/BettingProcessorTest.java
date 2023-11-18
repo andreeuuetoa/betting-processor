@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import domain.constants.BettingSide;
 import domain.constants.MatchOutcome;
 
+import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BettingProcessorTest {
@@ -20,7 +22,7 @@ public class BettingProcessorTest {
 
     @BeforeEach
     public void createNewPlayer() {
-        player = new Player();
+        player = new Player(UUID.randomUUID());
     }
 
     @BeforeAll
@@ -32,7 +34,7 @@ public class BettingProcessorTest {
 
     @Test
     public void testPlayerBetsOnASideAndGetsAProfitOnVictory() {
-        Match sampleMatch = new Match(sampleMatchDataWithASideWinning);
+        Match sampleMatch = new Match(UUID.randomUUID(), sampleMatchDataWithASideWinning);
         player.deposit(100);
         Betting betting = new Betting(player, sampleMatch, 30, BettingSide.A);
 
@@ -44,7 +46,7 @@ public class BettingProcessorTest {
 
     @Test
     public void testPlayerBetsOnBSideAndGetsAProfitOnVictory() {
-        Match sampleMatch = new Match(sampleMatchDataWithBSideWinning);
+        Match sampleMatch = new Match(UUID.randomUUID(), sampleMatchDataWithBSideWinning);
         player.deposit(100);
         Betting betting = new Betting(player, sampleMatch, 30, BettingSide.B);
 
@@ -56,7 +58,7 @@ public class BettingProcessorTest {
 
     @Test
     public void testPlayerBetsOnASideAndLosesMoneyOnLoss() {
-        Match sampleMatch = new Match(sampleMatchDataWithBSideWinning);
+        Match sampleMatch = new Match(UUID.randomUUID(), sampleMatchDataWithBSideWinning);
         player.deposit(100);
         Betting betting = new Betting(player, sampleMatch, 30, BettingSide.A);
 
@@ -68,7 +70,7 @@ public class BettingProcessorTest {
 
     @Test
     public void testPlayerBetsOnBSideAndLosesMoneyOnLoss() {
-        Match sampleMatch = new Match(sampleMatchDataWithASideWinning);
+        Match sampleMatch = new Match(UUID.randomUUID(), sampleMatchDataWithASideWinning);
         player.deposit(100);
         Betting betting = new Betting(player, sampleMatch, 30, BettingSide.B);
 
@@ -80,7 +82,7 @@ public class BettingProcessorTest {
 
     @Test
     public void testPlayerBetsAndGetsHisBetMoneyBackOnDraw() {
-        Match sampleMatch = new Match(sampleMatchDataWithDraw);
+        Match sampleMatch = new Match(UUID.randomUUID(), sampleMatchDataWithDraw);
         player.deposit(100);
         Betting betting = new Betting(player, sampleMatch, 30, BettingSide.B);
 

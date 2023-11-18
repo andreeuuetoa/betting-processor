@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import domain.constants.BettingSide;
 import domain.constants.MatchOutcome;
 
+import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -26,7 +28,7 @@ public class MatchTest {
 
     @Test
     public void testCreateSampleMatch() {
-        Match match = new Match(sampleMatchDataWithASideWinning);
+        Match match = new Match(UUID.randomUUID(), sampleMatchDataWithASideWinning);
 
         assertEquals(1.3, match.getMatchData().getABetRate());
         assertEquals(0.75, match.getMatchData().getBBetRate());
@@ -35,8 +37,8 @@ public class MatchTest {
 
     @Test
     public void testBettingWasCreatedCorrectlyForMatch() {
-        Match match = new Match(sampleMatchDataWithASideWinning);
-        Player player = new Player();
+        Match match = new Match(UUID.randomUUID(), sampleMatchDataWithASideWinning);
+        Player player = new Player(UUID.randomUUID());
 
         player.deposit(100);
         player.betOnMatch(30, match, BettingSide.A);
@@ -55,8 +57,8 @@ public class MatchTest {
 
     @Test
     public void testPlayerBetsOnASideAndGetsAProfitOnVictory() {
-        Match match = new Match(sampleMatchDataWithASideWinning);
-        Player player = new Player();
+        Match match = new Match(UUID.randomUUID(), sampleMatchDataWithASideWinning);
+        Player player = new Player(UUID.randomUUID());
 
         player.deposit(100);
         player.betOnMatch(30, match, BettingSide.A);
@@ -68,8 +70,8 @@ public class MatchTest {
 
     @Test
     public void testPlayerBetsOnBSideAndGetsAProfitOnVictory() {
-        Match match = new Match(sampleMatchDataWithBSideWinning);
-        Player player = new Player();
+        Match match = new Match(UUID.randomUUID(), sampleMatchDataWithBSideWinning);
+        Player player = new Player(UUID.randomUUID());
 
         player.deposit(100);
         player.betOnMatch(30, match, BettingSide.B);
@@ -81,8 +83,8 @@ public class MatchTest {
 
     @Test
     public void testPlayerBetsOnASideAndLosesMoneyOnLoss() {
-        Match match = new Match(sampleMatchDataWithBSideWinning);
-        Player player = new Player();
+        Match match = new Match(UUID.randomUUID(), sampleMatchDataWithBSideWinning);
+        Player player = new Player(UUID.randomUUID());
 
         player.deposit(100);
         player.betOnMatch(30, match, BettingSide.A);
@@ -94,8 +96,8 @@ public class MatchTest {
 
     @Test
     public void testPlayerBetsOnBSideAndLosesMoneyOnLoss() {
-        Match match = new Match(sampleMatchDataWithASideWinning);
-        Player player = new Player();
+        Match match = new Match(UUID.randomUUID(), sampleMatchDataWithASideWinning);
+        Player player = new Player(UUID.randomUUID());
 
         player.deposit(100);
         player.betOnMatch(30, match, BettingSide.B);
@@ -107,8 +109,8 @@ public class MatchTest {
 
     @Test
     public void testPlayerBetsAndGetsHisBetMoneyBackOnDraw() {
-        Match match = new Match(sampleMatchDataWithDraw);
-        Player player = new Player();
+        Match match = new Match(UUID.randomUUID(), sampleMatchDataWithDraw);
+        Player player = new Player(UUID.randomUUID());
 
         player.deposit(100);
         player.betOnMatch(30, match, BettingSide.B);
@@ -120,9 +122,9 @@ public class MatchTest {
 
     @Test
     public void testManyPlayersBetOnAMatch() {
-        Match match = new Match(sampleMatchDataWithASideWinning);
-        Player playerOne = new Player();
-        Player playerTwo = new Player();
+        Match match = new Match(UUID.randomUUID(), sampleMatchDataWithASideWinning);
+        Player playerOne = new Player(UUID.randomUUID());
+        Player playerTwo = new Player(UUID.randomUUID());
 
         playerOne.deposit(100);
         playerTwo.deposit(100);
@@ -138,8 +140,8 @@ public class MatchTest {
 
     @Test
     public void testPlayerBetsAndIsConsideredIllegal() {
-        Match match = new Match(sampleMatchDataWithASideWinning);
-        Player player = new Player();
+        Match match = new Match(UUID.randomUUID(), sampleMatchDataWithASideWinning);
+        Player player = new Player(UUID.randomUUID());
 
         player.deposit(100);
         player.betOnMatch(150, match, BettingSide.A);
