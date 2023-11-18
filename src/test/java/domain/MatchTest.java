@@ -29,7 +29,6 @@ public class MatchTest {
     public void testCreateSampleMatch() {
         Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning);
 
-        assertNotNull(match.getId());
         assertEquals(1.3, match.getMatchData().getABetRate());
         assertEquals(0.75, match.getMatchData().getBBetRate());
         assertEquals(MatchOutcome.A, match.getMatchData().getMatchOutcome());

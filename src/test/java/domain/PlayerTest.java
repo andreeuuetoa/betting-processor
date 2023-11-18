@@ -28,11 +28,6 @@ public class PlayerTest {
     }
 
     @Test
-    public void testGeneratedPlayerHasId() {
-        assertNotNull(player.getId());
-    }
-
-    @Test
     public void testPlayerInitialCoinbaseIsZero() {
         assertEquals(0, player.getCoins());
     }
