@@ -2,6 +2,7 @@ package util.files;
 
 import domain.constants.BettingSide;
 import domain.constants.PlayerActionType;
+import domain.objects.Match;
 import dto.PlayerAction;
 import org.junit.jupiter.api.Test;
 
@@ -103,5 +104,12 @@ public class PlayerActionDataFileReaderTest {
         assertEquals("abae2255-4255-4304-8589-737cdff61640", playerAction.getMatchId().toString());
         assertEquals(500, playerAction.getAmount());
         assertEquals(BettingSide.A, playerAction.getBettingSide());
+    }
+
+    @Test
+    public void testCreatePlayersFromGivenPlayerActionData() {
+        Path path = Paths.get("src", "test", "resources", "player_data.txt");
+        List<PlayerAction> playerActions = PlayerActionDataFileReader.createPlayerActionsFromFileInPath(path);
+        assertEquals(19, playerActions.size());
     }
 }
