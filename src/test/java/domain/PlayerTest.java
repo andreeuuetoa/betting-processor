@@ -8,10 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import domain.constants.BettingSide;
 import domain.constants.MatchOutcome;
-import util.objectgenerators.MatchGenerator;
-import util.objectgenerators.PlayerGenerator;
-
-import java.util.UUID;
+import util.MatchGenerator;
+import util.PlayerGenerator;
 
 import static org.junit.jupiter.api.Assertions.*;
 

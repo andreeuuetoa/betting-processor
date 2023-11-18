@@ -1,4 +1,4 @@
-package util.objectgenerators;
+package util;
 
 import domain.objects.Match;
 import dto.MatchData;
