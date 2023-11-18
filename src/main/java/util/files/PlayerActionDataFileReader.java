@@ -31,7 +31,6 @@ public class PlayerActionDataFileReader {
 
     private static PlayerAction createPlayerActionFromLine(String line) {
         String[] playerActionElements = line.split(",");
-        System.out.println(Arrays.toString(playerActionElements));
         UUID playerId = UUID.fromString(playerActionElements[0]);
         PlayerActionType playerActionType = parsePlayerActionTypeFromString(playerActionElements[1]);
         UUID matchId = playerActionElements[2].isEmpty() ? null : UUID.fromString(playerActionElements[2]);
