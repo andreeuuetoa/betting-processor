@@ -1,8 +1,9 @@
-package util;
+package util.files;
 
 import domain.constants.MatchOutcome;
 import domain.objects.Match;
 import org.junit.jupiter.api.Test;
+import util.files.MatchDataFileReader;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
