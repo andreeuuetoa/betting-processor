@@ -2,9 +2,11 @@ package domain.objects;
 
 import dto.Betting;
 import domain.constants.BettingSide;
+import lombok.Getter;
 
 import java.util.UUID;
 
+@Getter
 public class Player {
     private final UUID id;
     private int coins;
@@ -12,14 +14,6 @@ public class Player {
     public Player(UUID id) {
         this.id = id;
         coins = 0;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public int getCoins() {
-        return coins;
     }
 
     public void deposit(int coinsToDeposit) {
