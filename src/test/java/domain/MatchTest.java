@@ -25,106 +25,106 @@ public class MatchTest {
 
     @Test
     public void testCreateSampleMatch() {
-        Match sampleMatch = new Match(sampleMatchDataWithASideWinning);
+        Match match = new Match(sampleMatchDataWithASideWinning);
 
-        assertEquals(1.3, sampleMatch.getMatchData().getABetRate());
-        assertEquals(0.75, sampleMatch.getMatchData().getBBetRate());
-        assertEquals(MatchOutcome.A, sampleMatch.getMatchData().getMatchOutcome());
+        assertEquals(1.3, match.getMatchData().getABetRate());
+        assertEquals(0.75, match.getMatchData().getBBetRate());
+        assertEquals(MatchOutcome.A, match.getMatchData().getMatchOutcome());
     }
 
     @Test
     public void testBettingWasCreatedCorrectlyForMatch() {
-        Match sampleMatch = new Match(sampleMatchDataWithASideWinning);
+        Match match = new Match(sampleMatchDataWithASideWinning);
         Player player = new Player();
 
         player.deposit(100);
-        player.betOnMatch(30, sampleMatch, BettingSide.A);
+        player.betOnMatch(30, match, BettingSide.A);
 
-        assertOneBettingWasCreatedForMatchByPlayerAndIsCorrect(sampleMatch, player);
+        assertOneBettingWasCreatedForMatchByPlayerAndIsCorrect(match, player);
     }
 
-    private static void assertOneBettingWasCreatedForMatchByPlayerAndIsCorrect(Match sampleMatch, Player player) {
-        assertEquals(1, sampleMatch.getBettings().size());
+    private static void assertOneBettingWasCreatedForMatchByPlayerAndIsCorrect(Match match, Player player) {
+        assertEquals(1, match.getBettings().size());
 
-        Betting singleBettingOnMatch = sampleMatch.getBettings().get(0);
+        Betting singleBettingOnMatch = match.getBettings().get(0);
         assertEquals(player, singleBettingOnMatch.getPlayer());
-        assertEquals(sampleMatch, singleBettingOnMatch.getMatch());
+        assertEquals(match, singleBettingOnMatch.getMatch());
         assertEquals(30, singleBettingOnMatch.getAmount());
     }
 
     @Test
     public void testPlayerBetsOnASideAndGetsAProfitOnVictory() {
-        Match sampleMatch = new Match(sampleMatchDataWithASideWinning);
+        Match match = new Match(sampleMatchDataWithASideWinning);
         Player player = new Player();
 
         player.deposit(100);
-        player.betOnMatch(30, sampleMatch, BettingSide.A);
-        sampleMatch.payToPlayersAndCalculateCasinoProfit();
+        player.betOnMatch(30, match, BettingSide.A);
+        match.payToPlayersAndCalculateCasinoProfit();
 
         assertEquals(109, player.getCoins());
     }
 
     @Test
     public void testPlayerBetsOnBSideAndGetsAProfitOnVictory() {
-        Match sampleMatch = new Match(sampleMatchDataWithBSideWinning);
+        Match match = new Match(sampleMatchDataWithBSideWinning);
         Player player = new Player();
 
         player.deposit(100);
-        player.betOnMatch(30, sampleMatch, BettingSide.B);
-        sampleMatch.payToPlayersAndCalculateCasinoProfit();
+        player.betOnMatch(30, match, BettingSide.B);
+        match.payToPlayersAndCalculateCasinoProfit();
 
         assertEquals(92, player.getCoins());
     }
 
     @Test
     public void testPlayerBetsOnASideAndLosesMoneyOnLoss() {
-        Match sampleMatch = new Match(sampleMatchDataWithBSideWinning);
+        Match match = new Match(sampleMatchDataWithBSideWinning);
         Player player = new Player();
 
         player.deposit(100);
-        player.betOnMatch(30, sampleMatch, BettingSide.A);
-        sampleMatch.payToPlayersAndCalculateCasinoProfit();
+        player.betOnMatch(30, match, BettingSide.A);
+        match.payToPlayersAndCalculateCasinoProfit();
 
         assertEquals(70, player.getCoins());
     }
 
     @Test
     public void testPlayerBetsOnBSideAndLosesMoneyOnLoss() {
-        Match sampleMatch = new Match(sampleMatchDataWithASideWinning);
+        Match match = new Match(sampleMatchDataWithASideWinning);
         Player player = new Player();
 
         player.deposit(100);
-        player.betOnMatch(30, sampleMatch, BettingSide.B);
-        sampleMatch.payToPlayersAndCalculateCasinoProfit();
+        player.betOnMatch(30, match, BettingSide.B);
+        match.payToPlayersAndCalculateCasinoProfit();
 
         assertEquals(70, player.getCoins());
     }
 
     @Test
     public void testPlayerBetsAndGetsHisBetMoneyBackOnDraw() {
-        Match sampleMatch = new Match(sampleMatchDataWithDraw);
+        Match match = new Match(sampleMatchDataWithDraw);
         Player player = new Player();
 
         player.deposit(100);
-        player.betOnMatch(30, sampleMatch, BettingSide.B);
-        sampleMatch.payToPlayersAndCalculateCasinoProfit();
+        player.betOnMatch(30, match, BettingSide.B);
+        match.payToPlayersAndCalculateCasinoProfit();
 
         assertEquals(100, player.getCoins());
     }
 
     @Test
     public void testManyPlayersBetOnAMatch() {
-        Match sampleMatch = new Match(sampleMatchDataWithASideWinning);
+        Match match = new Match(sampleMatchDataWithASideWinning);
         Player playerOne = new Player();
         Player playerTwo = new Player();
 
         playerOne.deposit(100);
         playerTwo.deposit(100);
-        playerOne.betOnMatch(30, sampleMatch, BettingSide.A);
-        playerTwo.betOnMatch(30, sampleMatch, BettingSide.B);
-        sampleMatch.payToPlayersAndCalculateCasinoProfit();
+        playerOne.betOnMatch(30, match, BettingSide.A);
+        playerTwo.betOnMatch(30, match, BettingSide.B);
+        match.payToPlayersAndCalculateCasinoProfit();
 
-        assertEquals(2, sampleMatch.getBettings().size());
+        assertEquals(2, match.getBettings().size());
         assertEquals(109, playerOne.getCoins());
         assertEquals(70, playerTwo.getCoins());
     }
