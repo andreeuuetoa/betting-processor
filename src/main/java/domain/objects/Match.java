@@ -1,6 +1,6 @@
 package domain.objects;
 
-import bettingprocessor.BettingProcessor;
+import returnmoneycalculator.ReturnMoneyCalculator;
 import dto.Betting;
 import dto.MatchData;
 import lombok.Getter;
@@ -33,12 +33,12 @@ public class Match {
     }
 
     public int calculateCasinoProfit() {
-        BettingProcessor bettingProcessorForMatch = new BettingProcessor(getMatchData());
+        ReturnMoneyCalculator returnMoneyCalculatorForMatch = new ReturnMoneyCalculator(getMatchData());
         int casinoProfit = 0;
 
         for (Betting betting : bettings) {
             if (!illegalPlayers.contains(betting.getPlayer())) {
-                int moneyGotBack = bettingProcessorForMatch.calculateMoneyGotBackFromBetting(betting);
+                int moneyGotBack = returnMoneyCalculatorForMatch.calculateMoneyGotBackFromBetting(betting);
                 casinoProfit -= moneyGotBack - betting.getAmount();
             }
         }
@@ -47,11 +47,11 @@ public class Match {
     }
 
     public void payToPlayers() {
-        BettingProcessor bettingProcessorForMatch = new BettingProcessor(getMatchData());
+        ReturnMoneyCalculator returnMoneyCalculatorForMatch = new ReturnMoneyCalculator(getMatchData());
 
         for (Betting betting : bettings) {
             if (!illegalPlayers.contains(betting.getPlayer())) {
-                int moneyGotBack = bettingProcessorForMatch.calculateMoneyGotBackFromBetting(betting);
+                int moneyGotBack = returnMoneyCalculatorForMatch.calculateMoneyGotBackFromBetting(betting);
                 Player player = betting.getPlayer();
                 player.deposit(moneyGotBack);
             }

@@ -1,4 +1,4 @@
-package bettingprocessor;
+package returnmoneycalculator;
 
 import dto.Betting;
 import dto.MatchData;
@@ -9,7 +9,7 @@ import domain.constants.MatchOutcome;
 
 @Getter
 @AllArgsConstructor
-public class BettingProcessor {
+public class ReturnMoneyCalculator {
     private MatchData matchData;
 
     public int calculateMoneyGotBackFromBetting(Betting betting) {

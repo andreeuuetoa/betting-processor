@@ -1,4 +1,4 @@
-package bettingprocessor;
+package returnmoneycalculator;
 
 import domain.objects.Match;
 import domain.objects.Player;
@@ -14,7 +14,7 @@ import util.objectgenerator.PlayerGenerator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class BettingProcessorTest {
+public class ReturnMoneyCalculatorTest {
     private static MatchData sampleMatchDataWithASideWinning;
     private static MatchData sampleMatchDataWithBSideWinning;
     private static MatchData sampleMatchDataWithDraw;
@@ -38,8 +38,8 @@ public class BettingProcessorTest {
         player.deposit(100);
         Betting betting = new Betting(player, sampleMatch, 30, BettingSide.A);
 
-        BettingProcessor bettingProcessor = new BettingProcessor(sampleMatchDataWithASideWinning);
-        int moneyGotBack = bettingProcessor.calculateMoneyGotBackFromBetting(betting);
+        ReturnMoneyCalculator returnMoneyCalculator = new ReturnMoneyCalculator(sampleMatchDataWithASideWinning);
+        int moneyGotBack = returnMoneyCalculator.calculateMoneyGotBackFromBetting(betting);
 
         assertEquals(39, moneyGotBack);
     }
@@ -50,8 +50,8 @@ public class BettingProcessorTest {
         player.deposit(100);
         Betting betting = new Betting(player, sampleMatch, 30, BettingSide.B);
 
-        BettingProcessor bettingProcessor = new BettingProcessor(sampleMatchDataWithBSideWinning);
-        int moneyGotBack = bettingProcessor.calculateMoneyGotBackFromBetting(betting);
+        ReturnMoneyCalculator returnMoneyCalculator = new ReturnMoneyCalculator(sampleMatchDataWithBSideWinning);
+        int moneyGotBack = returnMoneyCalculator.calculateMoneyGotBackFromBetting(betting);
 
         assertEquals(22, moneyGotBack);
     }
@@ -62,8 +62,8 @@ public class BettingProcessorTest {
         player.deposit(100);
         Betting betting = new Betting(player, sampleMatch, 30, BettingSide.A);
 
-        BettingProcessor bettingProcessor = new BettingProcessor(sampleMatchDataWithBSideWinning);
-        int moneyGotBack = bettingProcessor.calculateMoneyGotBackFromBetting(betting);
+        ReturnMoneyCalculator returnMoneyCalculator = new ReturnMoneyCalculator(sampleMatchDataWithBSideWinning);
+        int moneyGotBack = returnMoneyCalculator.calculateMoneyGotBackFromBetting(betting);
 
         assertEquals(0, moneyGotBack);
     }
@@ -74,8 +74,8 @@ public class BettingProcessorTest {
         player.deposit(100);
         Betting betting = new Betting(player, sampleMatch, 30, BettingSide.B);
 
-        BettingProcessor bettingProcessor = new BettingProcessor(sampleMatchDataWithASideWinning);
-        int moneyGotBack = bettingProcessor.calculateMoneyGotBackFromBetting(betting);
+        ReturnMoneyCalculator returnMoneyCalculator = new ReturnMoneyCalculator(sampleMatchDataWithASideWinning);
+        int moneyGotBack = returnMoneyCalculator.calculateMoneyGotBackFromBetting(betting);
 
         assertEquals(0, moneyGotBack);
     }
@@ -86,8 +86,8 @@ public class BettingProcessorTest {
         player.deposit(100);
         Betting betting = new Betting(player, sampleMatch, 30, BettingSide.B);
 
-        BettingProcessor bettingProcessor = new BettingProcessor(sampleMatchDataWithDraw);
-        int moneyGotBack = bettingProcessor.calculateMoneyGotBackFromBetting(betting);
+        ReturnMoneyCalculator returnMoneyCalculator = new ReturnMoneyCalculator(sampleMatchDataWithDraw);
+        int moneyGotBack = returnMoneyCalculator.calculateMoneyGotBackFromBetting(betting);
 
         assertEquals(30, moneyGotBack);
     }
