@@ -38,4 +38,21 @@ public class ResultGenerator {
 	private boolean isLastPlayerInList(List<ResultLegitimatePlayer> legitimatePlayers, int playerCount) {
 		return playerCount < legitimatePlayers.size() - 1;
 	}
+
+	public String generateIllegitimatePlayerActionsResult(List<PlayerAction> illegitimatePlayerActions) {
+		int playerActionCount = 0;
+		StringBuilder illegitimatePlayerActionsStringBuilder = new StringBuilder();
+		for (PlayerAction illegitimatePlayerAction : illegitimatePlayerActions) {
+			illegitimatePlayerActionsStringBuilder.append(generateIllegitimatePlayerActionResult(illegitimatePlayerAction));
+			if (isLastPlayerActionInList(illegitimatePlayerActions, playerActionCount)) {
+				illegitimatePlayerActionsStringBuilder.append("\n");
+			}
+			playerActionCount++;
+		}
+		return illegitimatePlayerActionsStringBuilder.toString();
+	}
+
+	private boolean isLastPlayerActionInList(List<PlayerAction> illegitimatePlayerActions, int playerActionCount) {
+		return playerActionCount < illegitimatePlayerActions.size() - 1;
+	}
 }

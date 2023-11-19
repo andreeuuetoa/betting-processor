@@ -66,4 +66,20 @@ public class ResultGeneratorTest {
 		String actualIllegitimatePlayerAsString = new ResultGenerator().generateIllegitimatePlayerActionResult(illegitimatePlayerAction);
 		assertEquals(expectedIllegitimatePlayerAsString, actualIllegitimatePlayerAsString);
 	}
+
+	@Test
+	public void testMultipleIllegitimatePlayerActionsToString() {
+		String expectedIllegitimatePlayerActionsAsString = "163f23ed-e9a9-4e54-a5b1-4e1fc86f12f4 BET abae2255-4255-4304-8589-737cdff61640 5000 A\n4925ac98-833b-454b-9342-13ed3dfd3ccf WITHDRAW null 8093 null\n5de45517-4312-4596-9702-9277b6d649f2 BET de0785e2-58cb-413c-8e4b-1d135857733b 300 B";
+		List<PlayerAction> threeIllegitimatePlayerActions = generateThreeSampleIllegitimatePlayerActions();
+		String actualLegitimatePlayersAsString = new ResultGenerator().generateIllegitimatePlayerActionsResult(threeIllegitimatePlayerActions);
+		assertEquals(expectedIllegitimatePlayerActionsAsString, actualLegitimatePlayersAsString);
+	}
+
+	private List<PlayerAction> generateThreeSampleIllegitimatePlayerActions() {
+		return List.of(
+				new PlayerAction(UUID.fromString("163f23ed-e9a9-4e54-a5b1-4e1fc86f12f4"), PlayerActionType.BET, UUID.fromString("abae2255-4255-4304-8589-737cdff61640"), 5000, BettingSide.A),
+				new PlayerAction(UUID.fromString("4925ac98-833b-454b-9342-13ed3dfd3ccf"), PlayerActionType.WITHDRAW, null, 8093, null),
+				new PlayerAction(UUID.fromString("5de45517-4312-4596-9702-9277b6d649f2"), PlayerActionType.BET, UUID.fromString("de0785e2-58cb-413c-8e4b-1d135857733b"), 300, BettingSide.B)
+		);
+	}
 }
