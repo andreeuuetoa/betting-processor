@@ -161,9 +161,9 @@ public class CasinoTest {
 
 		casino.addMatch(new Match(matchId, sampleMatchDataWithASideWinning, casino));
 		casino.addMatch(new Match(matchId, sampleMatchDataWithBSideWinning, casino));
-		Match matchFound = casino.getMatchById(matchId);
-
-		assertNull(matchFound);
+		assertThrows(RuntimeException.class, () -> {
+			casino.getMatchById(matchId);
+		});
 	}
 
 	@Test
@@ -187,15 +187,15 @@ public class CasinoTest {
 	}
 
 	@Test
-	public void testGettingPlayerByIdFromCasinoWithMatchesWithDuplicateIdsReturnsNull() {
+	public void testGettingPlayerByIdFromCasinoWithMatchesWithDuplicateIdsThrowsException() {
 		UUID playerId = UUID.randomUUID();
 		Casino casino = new Casino();
 
 		casino.addPlayer(new Player(playerId, casino));
 		casino.addPlayer(new Player(playerId, casino));
-		Player playerFound = casino.getPlayerById(playerId);
-
-		assertNull(playerFound);
+		assertThrows(RuntimeException.class, () -> {
+			casino.getPlayerById(playerId);
+		});
 	}
 
 	@Test

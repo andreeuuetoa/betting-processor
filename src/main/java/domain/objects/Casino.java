@@ -32,7 +32,7 @@ public class Casino {
 			return null;
 		}
 		if (matchesWithId.size() > 1) {
-			return null;
+			throw new RuntimeException("Found match with duplicate ID: " + matchId);
 		}
 		return matchesWithId.get(0);
 	}
@@ -50,7 +50,7 @@ public class Casino {
 			return null;
 		}
 		if (playersWithID.size() > 1) {
-			return null;
+			throw new RuntimeException("Found player with duplicate ID: " + playerId);
 		}
 		return playersWithID.get(0);
 	}
