@@ -26,15 +26,15 @@ public class Casino {
 		illegitimatePlayers.add(player);
 	}
 
-	public Match getMatchByID(UUID matchId) {
-		List<Match> matchesWithID = matches.stream().filter(x -> x.getId().equals(matchId)).toList();
-		if (matchesWithID.isEmpty()) {
+	public Match getMatchById(UUID matchId) {
+		List<Match> matchesWithId = matches.stream().filter(x -> x.getId().equals(matchId)).toList();
+		if (matchesWithId.isEmpty()) {
 			throw new RuntimeException(String.format("No match with ID %s was found!", matchId));
 		}
-		if (matchesWithID.size() > 1) {
+		if (matchesWithId.size() > 1) {
 			throw new RuntimeException(String.format("Multiple matches with ID %s were found!", matchId));
 		}
-		return matches.stream().filter(x -> x.getId().equals(matchId)).toList().get(0);
+		return matchesWithId.get(0);
 	}
 
     public void playMatches() {
