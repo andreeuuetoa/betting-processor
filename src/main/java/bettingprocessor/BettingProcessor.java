@@ -70,7 +70,7 @@ public class BettingProcessor {
 			if (hasPlayerWithIdNotMadeAnIllegalMoveBefore(playerId)) {
 				illegalPlayerActions.add(playerAction);
 			}
-			if (casino.getIllegitimatePlayers().contains(player)) {
+			if (!casino.getIllegitimatePlayers().contains(player)) {
 				casino.addIllegitimatePlayer(player);
 			}
 		}
