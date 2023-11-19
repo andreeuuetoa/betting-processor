@@ -1,9 +1,11 @@
 package domain;
 
+import domain.constants.PlayerActionType;
 import domain.objects.Casino;
 import domain.objects.Match;
 import domain.objects.Player;
 import dto.MatchData;
+import dto.PlayerAction;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -161,9 +163,7 @@ public class CasinoTest {
 
 		casino.addMatch(new Match(matchId, sampleMatchDataWithASideWinning, casino));
 		casino.addMatch(new Match(matchId, sampleMatchDataWithBSideWinning, casino));
-		assertThrows(RuntimeException.class, () -> {
-			casino.getMatchById(matchId);
-		});
+		assertThrows(RuntimeException.class, () -> casino.getMatchById(matchId));
 	}
 
 	@Test
@@ -193,9 +193,7 @@ public class CasinoTest {
 
 		casino.addPlayer(new Player(playerId, casino));
 		casino.addPlayer(new Player(playerId, casino));
-		assertThrows(RuntimeException.class, () -> {
-			casino.getPlayerById(playerId);
-		});
+		assertThrows(RuntimeException.class, () -> casino.getPlayerById(playerId));
 	}
 
 	@Test
@@ -221,5 +219,65 @@ public class CasinoTest {
 		assertTrue(casino.getLegitimatePlayers().contains(playerThree));
 		assertFalse(casino.getLegitimatePlayers().contains(playerFour));
 		assertTrue(casino.getLegitimatePlayers().contains(playerFive));
+	}
+
+	@Test
+	public void testGetIllegitimatePlayersFromCasino() {
+		Casino casino = new Casino();
+		Player playerOne = new Player(UUID.randomUUID(), casino);
+		Player playerTwo = new Player(UUID.randomUUID(), casino);
+		Player playerThree = new Player(UUID.randomUUID(), casino);
+		Player playerFour = new Player(UUID.randomUUID(), casino);
+		Player playerFive = new Player(UUID.randomUUID(), casino);
+
+		casino.addPlayer(playerOne);
+		casino.addPlayer(playerTwo);
+		casino.addPlayer(playerThree);
+		casino.addPlayer(playerFour);
+		casino.addPlayer(playerFive);
+		casino.addIllegitimatePlayer(playerOne);
+		casino.addIllegitimatePlayer(playerFour);
+
+		assertEquals(2, casino.getIllegitimatePlayers().size());
+	}
+
+	@Test
+	public void testGetAllThePlayersFromCasino() {
+		Casino casino = new Casino();
+		Player playerOne = new Player(UUID.randomUUID(), casino);
+		Player playerTwo = new Player(UUID.randomUUID(), casino);
+		Player playerThree = new Player(UUID.randomUUID(), casino);
+		Player playerFour = new Player(UUID.randomUUID(), casino);
+		Player playerFive = new Player(UUID.randomUUID(), casino);
+
+		casino.addPlayer(playerOne);
+		casino.addPlayer(playerTwo);
+		casino.addPlayer(playerThree);
+		casino.addPlayer(playerFour);
+		casino.addPlayer(playerFive);
+		casino.addIllegitimatePlayer(playerOne);
+		casino.addIllegitimatePlayer(playerFour);
+
+		assertEquals(5, casino.getPlayers().size());
+	}
+
+	@Test
+	public void testGetIllegitimatePlayerFirstActionsIsInitiallyEmpty() {
+		Casino casino = new Casino();
+		assertEquals(0, casino.getIllegitimatePlayersFirstActions().size());
+	}
+
+	@Test
+	public void testAddIllegitimatePlayerFirstActionsToCasino() {
+		Casino casino = new Casino();
+		PlayerAction illegalPlayerAction = new PlayerAction(
+				UUID.randomUUID(),
+				PlayerActionType.BET,
+				UUID.randomUUID(),
+				30,
+				null
+		);
+		casino.addIllegitimatePlayerAction(illegalPlayerAction);
+		assertEquals(1, casino.getIllegitimatePlayersFirstActions().size());
 	}
 }

@@ -36,6 +36,11 @@ public class PlayerTest {
         assertEquals(0, player.getCoins());
     }
 
+	@Test
+	public void testPlayerWasInitializedWithACasino() {
+		assertEquals(casino, player.getCasino());
+	}
+
     @Test
     public void testPlayerCanDeposit() {
         player.deposit(300);

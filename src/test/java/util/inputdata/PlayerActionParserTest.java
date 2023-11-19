@@ -53,4 +53,16 @@ public class PlayerActionParserTest {
 		assertEquals(500, playerAction.getAmount());
 		assertEquals(BettingSide.A, playerAction.getBettingSide());
 	}
+
+	@Test
+	public void testCreatingPlayerActionWithIncorrectTypeThrowsException() {
+		String playerActionAsString = "163f23ed-e9a9-4e54-a5b1-4e1fc86f12f4,FOO,abae2255-4255-4304-8589-737cdff61640,500,A";
+		assertThrows(RuntimeException.class, () -> new PlayerActionParser().parsePlayerActionFromString(playerActionAsString));
+	}
+
+	@Test
+	public void testCreatingPlayerActionWithIncorrectBettingSideThrowsException() {
+		String playerActionAsString = "163f23ed-e9a9-4e54-a5b1-4e1fc86f12f4,BET,abae2255-4255-4304-8589-737cdff61640,500,C";
+		assertThrows(RuntimeException.class, () -> new PlayerActionParser().parsePlayerActionFromString(playerActionAsString));
+	}
 }

@@ -12,19 +12,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerActionDataFileReaderTest {
-    @Test
-    public void testDepositPlayerActionDataFileExistsAndContainsData() {
-        Path path = Paths.get("src", "test", "resources", "playerdata", "one_player_deposit_data.txt");
-        String oneMatchData = "163f23ed-e9a9-4e54-a5b1-4e1fc86f12f4,DEPOSIT,,4000,";
-        assertDoesNotThrow(() -> {Files.newBufferedReader(path);});
-        try (BufferedReader reader = Files.newBufferedReader(path)) {
-            String line = reader.readLine();
-            assertEquals(oneMatchData, line);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
 	@Test
 	public void testReadFromPlayerDataWithOneRow() {
 		Path path = Paths.get("src", "test", "resources", "playerdata", "one_player_withdraw_data.txt");
@@ -37,7 +24,15 @@ public class PlayerActionDataFileReaderTest {
 	@Test
 	public void testReadFromPlayerDataWithMultipleRows() {
 		Path path = Paths.get("src", "test", "resources", "playerdata", "player_data.txt");
-		List<String> matches = new MatchDataFileReader(path).getMatchesAsStringsFromFile();
+		List<String> matches = new PlayerActionDataFileReader(path).getPlayerActionsAsStringsFromFile();
 		assertEquals(19, matches.size());
+	}
+
+	@Test
+	public void testReaderThrowsExceptionIfCannotFindTheFile() {
+		Path path = Paths.get("incorrect-path", "player_data.txt");
+		assertThrows(RuntimeException.class, () -> {
+			new PlayerActionDataFileReader(path).getPlayerActionsAsStringsFromFile();
+		});
 	}
 }
