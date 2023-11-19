@@ -12,7 +12,10 @@ import domain.constants.MatchOutcome;
 import util.objectgenerator.MatchGenerator;
 import util.objectgenerator.PlayerGenerator;
 
+import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CasinoTest {
     private static MatchData sampleMatchDataWithASideWinning;
@@ -125,4 +128,33 @@ public class CasinoTest {
 
         assertEquals(0, casino.getBalance());
     }
+
+	@Test
+	public void testGetMatchByIdFromCasino() {
+		UUID matchId = UUID.randomUUID();
+		Casino casino = new Casino();
+
+		casino.addMatch(new Match(matchId, sampleMatchDataWithDraw, casino));
+		Match matchFound = casino.getMatchByID(matchId);
+
+		assertEquals(matchId, matchFound.getId());
+	}
+
+	@Test
+	public void testGettingMatchThatIsNotInCasinoByIdFromCasinoThrowsException() {
+		Casino casino = new Casino();
+
+		assertThrows(RuntimeException.class, () -> {casino.getMatchByID(UUID.randomUUID());});
+	}
+
+	@Test
+	public void testGettingMatchByIdFromCasinoWithMatchesWithDuplicateIdsThrowsException() {
+		UUID matchId = UUID.randomUUID();
+		Casino casino = new Casino();
+
+		casino.addMatch(new Match(matchId, sampleMatchDataWithASideWinning, casino));
+		casino.addMatch(new Match(matchId, sampleMatchDataWithBSideWinning, casino));
+
+		assertThrows(RuntimeException.class, () -> {casino.getMatchByID(matchId);});
+	}
 }
