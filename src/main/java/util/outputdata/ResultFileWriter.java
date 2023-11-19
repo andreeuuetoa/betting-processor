@@ -18,8 +18,7 @@ public class ResultFileWriter {
 			File newResultsFile = new File(resultFilePath.toString());
 			newResultsFile.createNewFile();
 			writer.write(result);
-		} catch (IOException e) {
-			throw new RuntimeException("Could not create new file in path: " + resultFilePath + " .");
-		}
-	}
+		} catch (IOException ignored) {
+        }
+    }
 }
