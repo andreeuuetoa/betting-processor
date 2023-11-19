@@ -49,7 +49,7 @@ public class ResultGeneratorTest {
 				5000,
 				BettingSide.A
 		);
-		String actualIllegitimatePlayerAsString = new ResultGenerator().generateIllegitimatePlayerResult(illegitimatePlayerAction);
+		String actualIllegitimatePlayerAsString = new ResultGenerator().generateIllegitimatePlayerActionResult(illegitimatePlayerAction);
 		assertEquals(expectedIllegitimatePlayerAsString, actualIllegitimatePlayerAsString);
 	}
 
@@ -63,7 +63,7 @@ public class ResultGeneratorTest {
 				8093,
 				null
 		);
-		String actualIllegitimatePlayerAsString = new ResultGenerator().generateIllegitimatePlayerResult(illegitimatePlayerAction);
+		String actualIllegitimatePlayerAsString = new ResultGenerator().generateIllegitimatePlayerActionResult(illegitimatePlayerAction);
 		assertEquals(expectedIllegitimatePlayerAsString, actualIllegitimatePlayerAsString);
 	}
 }

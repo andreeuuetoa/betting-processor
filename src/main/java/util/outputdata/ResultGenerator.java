@@ -13,7 +13,7 @@ public class ResultGenerator {
 				legitimatePlayer.getBettingWinRate());
 	}
 
-	public String generateIllegitimatePlayerResult(PlayerAction illegitimatePlayerAction) {
+	public String generateIllegitimatePlayerActionResult(PlayerAction illegitimatePlayerAction) {
 		return String.format("%s %s %s %d %s",
 				illegitimatePlayerAction.getPlayerId(),
 				illegitimatePlayerAction.getType(),
