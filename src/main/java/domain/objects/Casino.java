@@ -29,10 +29,10 @@ public class Casino {
 	public Match getMatchById(UUID matchId) {
 		List<Match> matchesWithId = matches.stream().filter(x -> x.getId().equals(matchId)).toList();
 		if (matchesWithId.isEmpty()) {
-			throw new RuntimeException(String.format("No match with ID %s was found!", matchId));
+			return null;
 		}
 		if (matchesWithId.size() > 1) {
-			throw new RuntimeException(String.format("Multiple matches with ID %s were found!", matchId));
+			return null;
 		}
 		return matchesWithId.get(0);
 	}

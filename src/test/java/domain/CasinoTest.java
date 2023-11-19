@@ -143,7 +143,9 @@ public class CasinoTest {
 	public void testGettingMatchThatIsNotInCasinoByIdFromCasinoThrowsException() {
 		Casino casino = new Casino();
 
-		assertThrows(RuntimeException.class, () -> {casino.getMatchById(UUID.randomUUID());});
+		Match matchFound = casino.getMatchById(UUID.randomUUID());
+
+		assertNull(matchFound);
 	}
 
 	@Test
@@ -153,8 +155,9 @@ public class CasinoTest {
 
 		casino.addMatch(new Match(matchId, sampleMatchDataWithASideWinning, casino));
 		casino.addMatch(new Match(matchId, sampleMatchDataWithBSideWinning, casino));
+		Match matchFound = casino.getMatchById(matchId);
 
-		assertThrows(RuntimeException.class, () -> {casino.getMatchById(matchId);});
+		assertNull(matchFound);
 	}
 
 	@Test
