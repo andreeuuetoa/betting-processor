@@ -20,6 +20,10 @@ public class Casino {
         matches.add(match);
     }
 
+	public void addIllegalPlayer(Player player) {
+		illegalPlayers.add(player);
+	}
+
     public void playMatches() {
         for (Match match : matches) {
             balance += match.calculateCasinoProfit();

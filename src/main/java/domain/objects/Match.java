@@ -59,6 +59,6 @@ public class Match {
     }
 
     public void addIllegalPlayer(Player player) {
-        casino.getIllegalPlayers().add(player);
+        casino.addIllegalPlayer(player);
     }
 }
