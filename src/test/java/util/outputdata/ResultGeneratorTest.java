@@ -82,4 +82,23 @@ public class ResultGeneratorTest {
 				new PlayerAction(UUID.fromString("5de45517-4312-4596-9702-9277b6d649f2"), PlayerActionType.BET, UUID.fromString("de0785e2-58cb-413c-8e4b-1d135857733b"), 300, BettingSide.B)
 		);
 	}
+
+	@Test
+	public void testGenerateFullResultAsString() {
+		String expectedResultString = """
+				163f23ed-e9a9-4e54-a5b1-4e1fc86f12f4 4321 0,80
+				abae2255-4255-4304-8589-737cdff61640 5000 0,95
+				5de45517-4312-4596-9702-9277b6d649f2 918 0,45
+				
+				163f23ed-e9a9-4e54-a5b1-4e1fc86f12f4 BET abae2255-4255-4304-8589-737cdff61640 5000 A
+				4925ac98-833b-454b-9342-13ed3dfd3ccf WITHDRAW null 8093 null
+				5de45517-4312-4596-9702-9277b6d649f2 BET de0785e2-58cb-413c-8e4b-1d135857733b 300 B
+				
+				1523""";
+		List<ResultLegitimatePlayer> threeLegitimatePlayers = generateThreeSampleLegitimatePlayers();
+		List<PlayerAction> threeIllegitimatePlayerActions = generateThreeSampleIllegitimatePlayerActions();
+		long casinoBalance = 1523;
+		String actualResultString = new ResultGenerator().generateCompleteOutputResult(threeLegitimatePlayers, threeIllegitimatePlayerActions, casinoBalance);
+		assertEquals(expectedResultString, actualResultString);
+	}
 }

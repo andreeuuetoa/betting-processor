@@ -55,4 +55,12 @@ public class ResultGenerator {
 	private boolean isLastPlayerActionInList(List<PlayerAction> illegitimatePlayerActions, int playerActionCount) {
 		return playerActionCount < illegitimatePlayerActions.size() - 1;
 	}
+
+	public String generateCompleteOutputResult(List<ResultLegitimatePlayer> legitimatePlayers, List<PlayerAction> illegitimatePlayerActions, long casinoBalance) {
+		return generateLegitimatePlayersResult(legitimatePlayers) +
+				"\n\n" +
+				generateIllegitimatePlayerActionsResult(illegitimatePlayerActions) +
+				"\n\n" +
+				casinoBalance;
+	}
 }
