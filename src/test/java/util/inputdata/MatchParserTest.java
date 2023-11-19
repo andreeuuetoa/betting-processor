@@ -25,8 +25,6 @@ public class MatchParserTest {
 	@Test
 	public void testParsingMatchFromStringThatHasAnIncorrectMatchOutcomeThrowsException() {
 		String matchAsString = "abae2255-4255-4304-8589-7ab45f61640,1.45,0.5,C";
-		assertThrows(RuntimeException.class, () -> {
-			new MatchParser().parseMatchInfoFromString(matchAsString);
-		});
+		assertThrows(RuntimeException.class, () -> new MatchParser().parseMatchInfoFromString(matchAsString));
 	}
 }

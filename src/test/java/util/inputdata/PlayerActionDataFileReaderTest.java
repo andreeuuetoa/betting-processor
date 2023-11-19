@@ -2,9 +2,6 @@ package util.inputdata;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -31,8 +28,6 @@ public class PlayerActionDataFileReaderTest {
 	@Test
 	public void testReaderThrowsExceptionIfCannotFindTheFile() {
 		Path path = Paths.get("incorrect-path", "player_data.txt");
-		assertThrows(RuntimeException.class, () -> {
-			new PlayerActionDataFileReader(path).getPlayerActionsAsStringsFromFile();
-		});
+		assertThrows(RuntimeException.class, () -> new PlayerActionDataFileReader(path).getPlayerActionsAsStringsFromFile());
 	}
 }
