@@ -1,6 +1,5 @@
 package util.inputdata;
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,11 +19,13 @@ public class PlayerActionDataFileReader {
 		try (BufferedReader reader = Files.newBufferedReader(playerActionDataFilePath)) {
 			while (true) {
 				String line = reader.readLine();
-				if (line == null) break;
+				if (line == null) {
+					break;
+				}
 				playerActions.add(line);
 			}
 		} catch (IOException e) {
-			System.out.println("Error reading file:" + e.getMessage());
+			throw new RuntimeException("File in path: " + playerActionDataFilePath.toString() + " was not found.");
 		}
 		return playerActions;
 	}

@@ -20,11 +20,13 @@ public class MatchDataFileReader {
         try (BufferedReader reader = Files.newBufferedReader(matchDataFilePath)) {
             while (true) {
                 String line = reader.readLine();
-                if (line == null) break;
+                if (line == null) {
+	                break;
+                }
                 matches.add(line);
             }
         } catch (IOException e) {
-            System.out.println("Error reading file:" + e.getMessage());
+	        throw new RuntimeException("File in path: " + matchDataFilePath.toString() + " was not found.");
         }
         return matches;
     }

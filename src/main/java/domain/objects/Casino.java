@@ -1,5 +1,6 @@
 package domain.objects;
 
+import dto.PlayerAction;
 import lombok.Getter;
 
 import java.util.*;
@@ -7,14 +8,16 @@ import java.util.*;
 @Getter
 public class Casino {
     private long balance;
-    private List<Match> matches;
-    private Set<Player> illegitimatePlayers;
-	private Set<Player> players;
+    private final List<Match> matches;
+    private final List<Player> illegitimatePlayers;
+	private final List<PlayerAction> illegitimatePlayersFirstActions;
+	private final Set<Player> players;
 
     public Casino() {
         balance = 0;
         matches = new ArrayList<>();
-        illegitimatePlayers = new HashSet<>();
+        illegitimatePlayers = new ArrayList<>();
+		illegitimatePlayersFirstActions = new ArrayList<>();
 		players = new HashSet<>();
     }
 
@@ -24,6 +27,11 @@ public class Casino {
 
 	public void addIllegitimatePlayer(Player player) {
 		illegitimatePlayers.add(player);
+		illegitimatePlayers.sort(Comparator.comparing(Player::getId));
+	}
+
+	public void addIllegitimatePlayerAction(PlayerAction playerAction) {
+		illegitimatePlayersFirstActions.add(playerAction);
 	}
 
 	public Match getMatchById(UUID matchId) {
@@ -41,6 +49,7 @@ public class Casino {
         for (Match match : matches) {
             balance += match.calculateCasinoProfit();
             match.payToPlayers();
+			match.updateGamesPlayedAndWonForPlayers();
         }
     }
 

@@ -16,7 +16,7 @@ public class ResultFileWriter {
 		try (BufferedWriter writer = Files.newBufferedWriter(resultFilePath)) {
 			writer.write(result);
 		} catch (IOException e) {
-			System.out.println("IOException:" + e.getMessage());
+			throw new RuntimeException("File in path: " + resultFilePath.toString() + " was not found.");
 		}
 	}
 }
