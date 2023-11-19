@@ -14,8 +14,7 @@ import util.objectgenerator.PlayerGenerator;
 
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CasinoTest {
     private static MatchData sampleMatchDataWithASideWinning;
@@ -170,20 +169,23 @@ public class CasinoTest {
 	}
 
 	@Test
-	public void testGettingPlayerThatIsNotInCasinoByIdFromCasinoThrowsException() {
+	public void testGettingPlayerThatIsNotInCasinoByIdFromCasinoReturnsNull() {
 		Casino casino = new Casino();
 
-		assertThrows(RuntimeException.class, () -> {casino.getPlayerById(UUID.randomUUID());});
+		Player playerFound = casino.getPlayerById(UUID.randomUUID());
+
+		assertNull(playerFound);
 	}
 
 	@Test
-	public void testGettingPlayerByIdFromCasinoWithMatchesWithDuplicateIdsThrowsException() {
+	public void testGettingPlayerByIdFromCasinoWithMatchesWithDuplicateIdsReturnsNull() {
 		UUID playerId = UUID.randomUUID();
 		Casino casino = new Casino();
 
 		casino.addPlayer(new Player(playerId));
 		casino.addPlayer(new Player(playerId));
+		Player playerFound = casino.getPlayerById(playerId);
 
-		assertThrows(RuntimeException.class, () -> {casino.getPlayerById(playerId);});
+		assertNull(playerFound);
 	}
 }

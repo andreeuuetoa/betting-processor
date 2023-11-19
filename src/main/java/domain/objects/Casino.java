@@ -47,10 +47,10 @@ public class Casino {
 	public Player getPlayerById(UUID playerId) {
 		List<Player> playersWithID = players.stream().filter(x -> x.getId().equals(playerId)).toList();
 		if (playersWithID.isEmpty()) {
-			throw new RuntimeException(String.format("No player with ID %s was found!", playerId));
+			return null;
 		}
 		if (playersWithID.size() > 1) {
-			throw new RuntimeException(String.format("Multiple players with ID %s were found!", playerId));
+			return null;
 		}
 		return playersWithID.get(0);
 	}
