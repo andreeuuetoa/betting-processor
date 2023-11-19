@@ -1,6 +1,7 @@
 package util.files;
 
 import domain.constants.MatchOutcome;
+import domain.objects.Casino;
 import domain.objects.Match;
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +32,7 @@ public class MatchDataFileReaderTest {
     @Test
     public void testCreateMatchFromMatchDataWithOneRow() {
         Path path = Paths.get("src", "test", "resources", "matchdata", "one_match_data.txt");
-        List<Match> matches = MatchDataFileReader.createMatchesFromFileInPath(path);
+        List<Match> matches = new MatchDataFileReader(new Casino()).createMatchesFromFileInPath(path);
         assertEquals(1, matches.size());
         Match match = matches.get(0);
         assertMatchWasCreatedCorrectly(match);
@@ -47,7 +48,7 @@ public class MatchDataFileReaderTest {
     @Test
     public void testCreateMatchesFromGivenMatchData() {
         Path path = Paths.get("src", "test", "resources", "matchdata", "match_data.txt");
-        List<Match> matches = MatchDataFileReader.createMatchesFromFileInPath(path);
+        List<Match> matches = new MatchDataFileReader(new Casino()).createMatchesFromFileInPath(path);
         assertEquals(13, matches.size());
     }
 }

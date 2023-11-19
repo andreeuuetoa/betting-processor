@@ -1,6 +1,7 @@
 package util.files;
 
 import domain.constants.MatchOutcome;
+import domain.objects.Casino;
 import domain.objects.Match;
 import dto.MatchData;
 
@@ -14,7 +15,13 @@ import java.util.UUID;
 
 public class MatchDataFileReader {
 
-    public static List<Match> createMatchesFromFileInPath(Path path) {
+    private final Casino casino;
+
+    public MatchDataFileReader(Casino casino) {
+        this.casino = casino;
+    }
+
+    public List<Match> createMatchesFromFileInPath(Path path) {
         List<Match> matches = new ArrayList<>();
         try (BufferedReader reader = Files.newBufferedReader(path)) {
             while (true) {
@@ -29,16 +36,16 @@ public class MatchDataFileReader {
         return matches;
     }
 
-    private static Match createMatchFromLine(String line) {
+    private Match createMatchFromLine(String line) {
         String[] matchElements = line.split(",");
         UUID matchId = UUID.fromString(matchElements[0]);
         double aBetRate = Double.parseDouble(matchElements[1]);
         double bBetRate = Double.parseDouble(matchElements[2]);
         MatchOutcome matchOutcome = parseMatchOutcomeFromString(matchElements[3]);
-        return new Match(matchId, new MatchData(aBetRate, bBetRate, matchOutcome));
+        return new Match(matchId, new MatchData(aBetRate, bBetRate, matchOutcome), casino);
     }
 
-    private static MatchOutcome parseMatchOutcomeFromString(String matchOutcomeAsString) {
+    private MatchOutcome parseMatchOutcomeFromString(String matchOutcomeAsString) {
         return switch (matchOutcomeAsString) {
             case "A" -> MatchOutcome.A;
             case "B" -> MatchOutcome.B;
