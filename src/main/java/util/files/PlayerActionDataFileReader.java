@@ -54,4 +54,18 @@ public class PlayerActionDataFileReader {
             default -> throw new IllegalStateException("Unexpected match outcome: " + bettingSideAsString);
         };
     }
+
+	public List<String> getPlayerActionsAsStringsFromFileInPath(Path path) {
+		List<String> playerActions = new ArrayList<>();
+		try (BufferedReader reader = Files.newBufferedReader(path)) {
+			while (true) {
+				String line = reader.readLine();
+				if (line == null) break;
+				playerActions.add(line);
+			}
+		} catch (IOException e) {
+			System.out.println("Error reading file:" + e.getMessage());
+		}
+		return playerActions;
+	}
 }
