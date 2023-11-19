@@ -37,7 +37,7 @@ public class Match {
         int casinoProfit = 0;
 
         for (Betting betting : bettings) {
-            if (!casino.getIllegalPlayers().contains(betting.getPlayer())) {
+            if (playerWhoMadeTheBettingIsNotIllegitimate(betting)) {
                 int moneyGotBack = returnMoneyCalculatorForMatch.calculateMoneyGotBackFromBetting(betting);
                 casinoProfit -= moneyGotBack - betting.getAmount();
             }
@@ -46,17 +46,21 @@ public class Match {
         return casinoProfit;
     }
 
-    public void payToPlayers() {
+	public void payToPlayers() {
         ReturnMoneyCalculator returnMoneyCalculatorForMatch = new ReturnMoneyCalculator(getMatchData());
 
         for (Betting betting : bettings) {
-            if (!casino.getIllegalPlayers().contains(betting.getPlayer())) {
+            if (playerWhoMadeTheBettingIsNotIllegitimate(betting)) {
                 int moneyGotBack = returnMoneyCalculatorForMatch.calculateMoneyGotBackFromBetting(betting);
                 Player player = betting.getPlayer();
                 player.deposit(moneyGotBack);
             }
         }
     }
+
+	private boolean playerWhoMadeTheBettingIsNotIllegitimate(Betting betting) {
+		return !casino.getIllegalPlayers().contains(betting.getPlayer());
+	}
 
     public void addIllegalPlayer(Player player) {
         casino.addIllegalPlayer(player);
