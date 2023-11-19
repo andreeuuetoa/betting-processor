@@ -1,4 +1,4 @@
-package util.files;
+package util.inputdata;
 
 import dto.MatchInfo;
 import org.junit.jupiter.api.Test;

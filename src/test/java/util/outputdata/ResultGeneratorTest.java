@@ -1,4 +1,4 @@
-package util.resultgenerator;
+package util.outputdata;
 
 import domain.constants.BettingSide;
 import domain.constants.PlayerActionType;

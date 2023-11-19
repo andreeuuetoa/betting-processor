@@ -1,4 +1,4 @@
-package util.files;
+package util.inputdata;
 
 import domain.constants.MatchOutcome;
 import dto.MatchData;

@@ -1,4 +1,4 @@
-package util.resultgenerator;
+package util.outputdata;
 
 import dto.PlayerAction;
 import dto.ResultLegitimatePlayer;

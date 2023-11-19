@@ -1,8 +1,5 @@
-package util.files;
+package util.inputdata;
 
-import domain.constants.BettingSide;
-import domain.constants.PlayerActionType;
-import dto.PlayerAction;
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;

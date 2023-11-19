@@ -1,4 +1,4 @@
-package util.files;
+package util.inputdata;
 
 
 import java.io.BufferedReader;

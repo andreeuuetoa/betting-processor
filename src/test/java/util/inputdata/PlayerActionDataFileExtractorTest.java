@@ -1,4 +1,4 @@
-package util.files;
+package util.inputdata;
 
 import dto.PlayerAction;
 import org.junit.jupiter.api.Test;
