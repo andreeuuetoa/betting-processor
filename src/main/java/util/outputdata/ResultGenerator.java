@@ -35,7 +35,7 @@ public class ResultGenerator {
 		return legitimatePlayersStringBuilder.toString();
 	}
 
-	private boolean isLastPlayerInList(List<ResultLegitimatePlayer> legitimatePlayers, int indexOfList) {
-		return indexOfList < legitimatePlayers.size() - 1;
+	private boolean isLastPlayerInList(List<ResultLegitimatePlayer> legitimatePlayers, int playerCount) {
+		return playerCount < legitimatePlayers.size() - 1;
 	}
 }
