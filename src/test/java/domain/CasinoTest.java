@@ -157,4 +157,33 @@ public class CasinoTest {
 
 		assertThrows(RuntimeException.class, () -> {casino.getMatchByID(matchId);});
 	}
+
+	@Test
+	public void testGetPlayerByIdFromCasino() {
+		UUID playerId = UUID.randomUUID();
+		Casino casino = new Casino();
+
+		casino.addPlayer(new Player(playerId));
+		Player playerFound = casino.getPlayerById(playerId);
+
+		assertEquals(playerId, playerFound.getId());
+	}
+
+	@Test
+	public void testGettingPlayerThatIsNotInCasinoByIdFromCasinoThrowsException() {
+		Casino casino = new Casino();
+
+		assertThrows(RuntimeException.class, () -> {casino.getPlayerById(UUID.randomUUID());});
+	}
+
+	@Test
+	public void testGettingPlayerByIdFromCasinoWithMatchesWithDuplicateIdsThrowsException() {
+		UUID playerId = UUID.randomUUID();
+		Casino casino = new Casino();
+
+		casino.addPlayer(new Player(playerId));
+		casino.addPlayer(new Player(playerId));
+
+		assertThrows(RuntimeException.class, () -> {casino.getPlayerById(playerId);});
+	}
 }
