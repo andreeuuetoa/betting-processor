@@ -10,7 +10,7 @@ In that folder, there are two files, match_data.txt and player_data.txt, both of
 
 The match_data.txt file consists of multiple lines, each visualising a match that was played in the casino.
 For each line, the elements are separated with a comma and their meanings are:
-* First value is the match id – A random UUID.
+* First value is the match ID – A random UUID.
 * Second value is the return rate for A side.
 * Third value is the return rate for B side.
 * Fourth value is the result of the match.
@@ -19,7 +19,7 @@ The player_data.txt is similar to that of match_data.txt, but this file consists
 Each line consists of those values separated by a comma:
 * First value is player ID – A random UUID.
 * Second value is player operation – One of 3 operations: DEPOSIT, BET, WITHDRAW.
-* Third value (if exists) is a match id – A random UUID.
+* Third value (if exists) is a match ID – A random UUID.
 * Fourth value is the coin number player use for that operation.
 * Fifth value (if exists) is the side of the match the player places the bet on.
 
