@@ -57,7 +57,7 @@ public class PlayerActionDataFileReaderTest {
     @Test
     public void testCreateDepositPlayerActionFromPlayerData() {
         Path path = Paths.get("src", "test", "resources", "playerdata", "one_player_deposit_data.txt");
-        List<PlayerAction> playerActions = PlayerActionDataFileReader.createPlayerActionsFromFileInPath(path);
+        List<PlayerAction> playerActions = new PlayerActionDataFileReader().createPlayerActionsFromFileInPath(path);
         assertEquals(1, playerActions.size());
         PlayerAction playerAction = playerActions.get(0);
         assertDepositPlayerActionWasCreatedCorrectly(playerAction);
@@ -74,7 +74,7 @@ public class PlayerActionDataFileReaderTest {
     @Test
     public void testCreateWithdrawPlayerActionFromPlayerData() {
         Path path = Paths.get("src", "test", "resources", "playerdata", "one_player_withdraw_data.txt");
-        List<PlayerAction> playerActions = PlayerActionDataFileReader.createPlayerActionsFromFileInPath(path);
+        List<PlayerAction> playerActions = new PlayerActionDataFileReader().createPlayerActionsFromFileInPath(path);
         assertEquals(1, playerActions.size());
         PlayerAction playerAction = playerActions.get(0);
         assertWithdrawPlayerActionWasCreatedCorrectly(playerAction);
@@ -91,7 +91,7 @@ public class PlayerActionDataFileReaderTest {
     @Test
     public void testCreateBetPlayerActionFromPlayerData() {
         Path path = Paths.get("src", "test", "resources", "playerdata", "one_player_bet_data.txt");
-        List<PlayerAction> playerActions = PlayerActionDataFileReader.createPlayerActionsFromFileInPath(path);
+        List<PlayerAction> playerActions = new PlayerActionDataFileReader().createPlayerActionsFromFileInPath(path);
         assertEquals(1, playerActions.size());
         PlayerAction playerAction = playerActions.get(0);
         assertBetPlayerActionWasCreatedCorrectly(playerAction);
@@ -108,7 +108,7 @@ public class PlayerActionDataFileReaderTest {
     @Test
     public void testCreatePlayersFromGivenPlayerActionData() {
         Path path = Paths.get("src", "test", "resources", "playerdata", "player_data.txt");
-        List<PlayerAction> playerActions = PlayerActionDataFileReader.createPlayerActionsFromFileInPath(path);
+        List<PlayerAction> playerActions = new PlayerActionDataFileReader().createPlayerActionsFromFileInPath(path);
         assertEquals(19, playerActions.size());
     }
 }

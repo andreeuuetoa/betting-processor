@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class PlayerActionDataFileReader {
-    public static List<PlayerAction> createPlayerActionsFromFileInPath(Path path) {
+    public List<PlayerAction> createPlayerActionsFromFileInPath(Path path) {
         List<PlayerAction> playerActions = new ArrayList<>();
         try (BufferedReader reader = Files.newBufferedReader(path)) {
             while (true) {
@@ -28,7 +28,7 @@ public class PlayerActionDataFileReader {
         return playerActions;
     }
 
-    private static PlayerAction createPlayerActionFromLine(String line) {
+    private PlayerAction createPlayerActionFromLine(String line) {
         String[] playerActionElements = line.split(",");
         UUID playerId = UUID.fromString(playerActionElements[0]);
         PlayerActionType playerActionType = parsePlayerActionTypeFromString(playerActionElements[1]);
@@ -38,7 +38,7 @@ public class PlayerActionDataFileReader {
         return new PlayerAction(playerId, playerActionType, matchId, amount, bettingSide);
     }
 
-    private static PlayerActionType parsePlayerActionTypeFromString(String playerActionTypeAsString) {
+    private PlayerActionType parsePlayerActionTypeFromString(String playerActionTypeAsString) {
         return switch (playerActionTypeAsString) {
             case "DEPOSIT" -> PlayerActionType.DEPOSIT;
             case "WITHDRAW" -> PlayerActionType.WITHDRAW;
@@ -47,7 +47,7 @@ public class PlayerActionDataFileReader {
         };
     }
 
-    private static BettingSide parseBettingSideFromString(String bettingSideAsString) {
+    private BettingSide parseBettingSideFromString(String bettingSideAsString) {
         return switch (bettingSideAsString) {
             case "A" -> BettingSide.A;
             case "B" -> BettingSide.B;
