@@ -33,7 +33,7 @@ public class Player {
             match.addBetting(playerBetting);
             withdraw(coinsToBet);
         } catch (Exception e) {
-            match.addIllegalPlayer(this);
+            match.addIllegitimatePlayer(this);
         }
     }
 }

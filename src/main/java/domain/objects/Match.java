@@ -59,10 +59,10 @@ public class Match {
     }
 
 	private boolean playerWhoMadeTheBettingIsNotIllegitimate(Betting betting) {
-		return !casino.getIllegalPlayers().contains(betting.getPlayer());
+		return !casino.getIllegitimatePlayers().contains(betting.getPlayer());
 	}
 
-    public void addIllegalPlayer(Player player) {
-        casino.addIllegalPlayer(player);
+    public void addIllegitimatePlayer(Player player) {
+        casino.addIllegitimatePlayer(player);
     }
 }
