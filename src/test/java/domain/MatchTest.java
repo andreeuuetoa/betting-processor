@@ -147,6 +147,6 @@ public class MatchTest {
         match.calculateCasinoProfit();
         match.payToPlayers();
 
-        assertTrue(match.getIllegalPlayers().contains(player));
+        assertTrue(match.getCasino().getIllegalPlayers().contains(player));
     }
 }

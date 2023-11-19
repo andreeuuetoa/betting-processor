@@ -12,13 +12,13 @@ public class Match {
     private final UUID id;
     private MatchData matchData;
     private List<Betting> bettings;
-    private Set<Player> illegalPlayers;
+    private Casino casino;
 
-    public Match(UUID id, MatchData matchData) {
+    public Match(UUID id, MatchData matchData, Casino casino) {
         this.id = id;
         this.matchData = matchData;
         bettings = new ArrayList<>();
-        illegalPlayers = new HashSet<>();
+        this.casino = casino;
     }
 
     public void addBetting(Betting betting) {
@@ -37,7 +37,7 @@ public class Match {
         int casinoProfit = 0;
 
         for (Betting betting : bettings) {
-            if (!illegalPlayers.contains(betting.getPlayer())) {
+            if (!casino.getIllegalPlayers().contains(betting.getPlayer())) {
                 int moneyGotBack = returnMoneyCalculatorForMatch.calculateMoneyGotBackFromBetting(betting);
                 casinoProfit -= moneyGotBack - betting.getAmount();
             }
@@ -50,7 +50,7 @@ public class Match {
         ReturnMoneyCalculator returnMoneyCalculatorForMatch = new ReturnMoneyCalculator(getMatchData());
 
         for (Betting betting : bettings) {
-            if (!illegalPlayers.contains(betting.getPlayer())) {
+            if (!casino.getIllegalPlayers().contains(betting.getPlayer())) {
                 int moneyGotBack = returnMoneyCalculatorForMatch.calculateMoneyGotBackFromBetting(betting);
                 Player player = betting.getPlayer();
                 player.deposit(moneyGotBack);
@@ -59,6 +59,6 @@ public class Match {
     }
 
     public void addIllegalPlayer(Player player) {
-        illegalPlayers.add(player);
+        casino.getIllegalPlayers().add(player);
     }
 }
