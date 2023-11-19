@@ -28,7 +28,7 @@ public class PlayerActionDataFileReaderTest {
 	@Test
 	public void testReadFromPlayerDataWithOneRow() {
 		Path path = Paths.get("src", "test", "resources", "playerdata", "one_player_withdraw_data.txt");
-		List<String> playerActionsAsStrings = new PlayerActionDataFileReader().getPlayerActionsAsStringsFromFileInPath(path);
+		List<String> playerActionsAsStrings = new PlayerActionDataFileReader(path).getPlayerActionsAsStringsFromFile();
 		assertEquals(1, playerActionsAsStrings.size());
 		String matchAsString = playerActionsAsStrings.get(0);
 		assertEquals("163f23ed-e9a9-4e54-a5b1-4e1fc86f12f4,WITHDRAW,,200,", matchAsString);
@@ -37,7 +37,7 @@ public class PlayerActionDataFileReaderTest {
 	@Test
 	public void testReadFromPlayerDataWithMultipleRows() {
 		Path path = Paths.get("src", "test", "resources", "playerdata", "player_data.txt");
-		List<String> matches = new MatchDataFileReader().getMatchesAsStringsFromFileInPath(path);
+		List<String> matches = new MatchDataFileReader(path).getMatchesAsStringsFromFile();
 		assertEquals(19, matches.size());
 	}
 }

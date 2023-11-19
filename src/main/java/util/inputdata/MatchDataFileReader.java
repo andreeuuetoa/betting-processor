@@ -9,10 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MatchDataFileReader {
+	private Path matchDataFilePath;
 
-    public List<String> getMatchesAsStringsFromFileInPath(Path path) {
+	public MatchDataFileReader(Path path) {
+		matchDataFilePath = path;
+	}
+
+	public List<String> getMatchesAsStringsFromFile() {
         List<String> matches = new ArrayList<>();
-        try (BufferedReader reader = Files.newBufferedReader(path)) {
+        try (BufferedReader reader = Files.newBufferedReader(matchDataFilePath)) {
             while (true) {
                 String line = reader.readLine();
                 if (line == null) break;

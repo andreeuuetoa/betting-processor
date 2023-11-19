@@ -9,10 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerActionDataFileReader {
+	private Path playerActionDataFilePath;
 
-	public List<String> getPlayerActionsAsStringsFromFileInPath(Path path) {
+	public PlayerActionDataFileReader(Path path) {
+		playerActionDataFilePath = path;
+	}
+
+	public List<String> getPlayerActionsAsStringsFromFile() {
 		List<String> playerActions = new ArrayList<>();
-		try (BufferedReader reader = Files.newBufferedReader(path)) {
+		try (BufferedReader reader = Files.newBufferedReader(playerActionDataFilePath)) {
 			while (true) {
 				String line = reader.readLine();
 				if (line == null) break;
