@@ -27,7 +27,7 @@ public class CasinoTest {
     @BeforeEach
     public void createNewCasino() {
         casino = new Casino();
-        player = PlayerGenerator.generatePlayerWithRandomID();
+        player = PlayerGenerator.generatePlayerWithRandomID(casino);
     }
 
     @BeforeAll
@@ -44,9 +44,9 @@ public class CasinoTest {
 
     @Test
     public void testCasinoCanHostMatches() {
-        Match matchOne = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning);
-        Match matchTwo = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithBSideWinning);
-        Match matchThree = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithDraw);
+        Match matchOne = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning, casino);
+        Match matchTwo = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithBSideWinning, casino);
+        Match matchThree = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithDraw, casino);
 
         casino.addMatch(matchOne);
         casino.addMatch(matchTwo);
@@ -57,10 +57,11 @@ public class CasinoTest {
 
     @Test
     public void testCasinoPlaysOneMatchWithOnePlayerAndPlayerGetsMoney() {
-        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning);
+        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning, casino);
         player.deposit(100);
         player.betOnMatch(50, match, BettingSide.A);
 
+		casino.addPlayer(player);
         casino.addMatch(match);
         casino.playMatches();
 
@@ -69,10 +70,11 @@ public class CasinoTest {
 
     @Test
     public void testCasinoPlaysOneMatchWithOnePlayerAndCasinoLosesMoney() {
-        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning);
+        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning, casino);
         player.deposit(100);
         player.betOnMatch(50, match, BettingSide.A);
 
+		casino.addPlayer(player);
         casino.addMatch(match);
         casino.playMatches();
 
@@ -81,10 +83,11 @@ public class CasinoTest {
 
     @Test
     public void testCasinoPlaysOneMatchWithOnePlayerAndCasinoGetsAProfit() {
-        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithBSideWinning);
+        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithBSideWinning, casino);
         player.deposit(100);
         player.betOnMatch(50, match, BettingSide.A);
 
+		casino.addPlayer(player);
         casino.addMatch(match);
         casino.playMatches();
 
@@ -93,10 +96,11 @@ public class CasinoTest {
 
     @Test
     public void testCasinoPlaysOneMatchWithOnePlayerAndCasinoBalanceStaysConstant() {
-        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithDraw);
+        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithDraw, casino);
         player.deposit(100);
         player.betOnMatch(50, match, BettingSide.A);
 
+		casino.addPlayer(player);
         casino.addMatch(match);
         casino.playMatches();
 
@@ -105,10 +109,11 @@ public class CasinoTest {
 
     @Test
     public void testIllegalMoveByPlayerDoesNotImpactCasinoBalance() {
-        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning);
+        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning, casino);
         player.deposit(100);
         player.betOnMatch(150, match, BettingSide.A);
 
+		casino.addPlayer(player);
         casino.addMatch(match);
         casino.playMatches();
 
@@ -117,11 +122,12 @@ public class CasinoTest {
 
     @Test
     public void testLegalMoveAndThenAnIllegalMoveDoesNotImpactCasinoBalance() {
-        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning);
+        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning, casino);
         player.deposit(100);
         player.betOnMatch(50, match, BettingSide.A);
         player.betOnMatch(100, match, BettingSide.A);
 
+		casino.addPlayer(player);
         casino.addMatch(match);
         casino.playMatches();
 
@@ -165,7 +171,7 @@ public class CasinoTest {
 		UUID playerId = UUID.randomUUID();
 		Casino casino = new Casino();
 
-		casino.addPlayer(new Player(playerId));
+		casino.addPlayer(new Player(playerId, casino));
 		Player playerFound = casino.getPlayerById(playerId);
 
 		assertEquals(playerId, playerFound.getId());
@@ -185,10 +191,35 @@ public class CasinoTest {
 		UUID playerId = UUID.randomUUID();
 		Casino casino = new Casino();
 
-		casino.addPlayer(new Player(playerId));
-		casino.addPlayer(new Player(playerId));
+		casino.addPlayer(new Player(playerId, casino));
+		casino.addPlayer(new Player(playerId, casino));
 		Player playerFound = casino.getPlayerById(playerId);
 
 		assertNull(playerFound);
+	}
+
+	@Test
+	public void testGetLegitimatePlayersFromCasino() {
+		Casino casino = new Casino();
+		Player playerOne = new Player(UUID.randomUUID(), casino);
+		Player playerTwo = new Player(UUID.randomUUID(), casino);
+		Player playerThree = new Player(UUID.randomUUID(), casino);
+		Player playerFour = new Player(UUID.randomUUID(), casino);
+		Player playerFive = new Player(UUID.randomUUID(), casino);
+
+		casino.addPlayer(playerOne);
+		casino.addPlayer(playerTwo);
+		casino.addPlayer(playerThree);
+		casino.addPlayer(playerFour);
+		casino.addPlayer(playerFive);
+		casino.addIllegitimatePlayer(playerOne);
+		casino.addIllegitimatePlayer(playerFour);
+
+		assertEquals(3, casino.getLegitimatePlayers().size());
+		assertFalse(casino.getLegitimatePlayers().contains(playerOne));
+		assertTrue(casino.getLegitimatePlayers().contains(playerTwo));
+		assertTrue(casino.getLegitimatePlayers().contains(playerThree));
+		assertFalse(casino.getLegitimatePlayers().contains(playerFour));
+		assertTrue(casino.getLegitimatePlayers().contains(playerFive));
 	}
 }

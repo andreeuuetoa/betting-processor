@@ -1,6 +1,7 @@
 package domain;
 
 import domain.constants.PlayerActionType;
+import domain.objects.Casino;
 import domain.objects.Match;
 import domain.objects.Player;
 import dto.MatchData;
@@ -16,11 +17,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerTest {
     private Player player;
+	private Casino casino;
     private static MatchData sampleMatchData;
 
     @BeforeEach
-    public void createPlayer() {
-        player = PlayerGenerator.generatePlayerWithRandomID();
+    public void createPlayerAndCasino() {
+		casino = new Casino();
+        player = PlayerGenerator.generatePlayerWithRandomID(casino);
     }
 
     @BeforeAll
@@ -41,13 +44,15 @@ public class PlayerTest {
 
     @Test
     public void testPlayerCannotWithdrawFromEmptyCoinbase() {
-        assertThrows(RuntimeException.class, () -> player.withdraw(100));
+        player.withdraw(100);
+		assertTrue(casino.getIllegitimatePlayers().contains(player));
     }
 
     @Test
     public void testPlayerCannotWithdrawFromInsufficientCoinbase() {
         player.deposit(30);
-        assertThrows(RuntimeException.class, () -> player.withdraw(100));
+		player.withdraw(100);
+		assertTrue(casino.getIllegitimatePlayers().contains(player));
     }
 
     @Test
@@ -60,21 +65,21 @@ public class PlayerTest {
     @Test
     public void testPlayerBetsOnMatchAndCoinbaseDecreases() {
         player.deposit(100);
-        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchData);
+        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchData, casino);
         player.betOnMatch(30, match, BettingSide.A);
         assertEquals(70, player.getCoins());
     }
 
     @Test
     public void testPlayerBetsWithEmptyCoinbaseAndCoinbaseRemainsConstant() {
-        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchData);
+        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchData, casino);
         player.betOnMatch(50, match, BettingSide.A);
         assertEquals(0, player.getCoins());
     }
 
     @Test
     public void testPlayerBetsWithInsufficientCoinbaseAndCoinbaseRemainsConstant() {
-        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchData);
+        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchData, casino);
         player.deposit(30);
         player.betOnMatch(50, match, BettingSide.A);
         assertEquals(30, player.getCoins());
@@ -82,7 +87,7 @@ public class PlayerTest {
 
     @Test
     public void testPlayerBetsTwiceOnAMatchAndCoinbaseRemainsConstant() {
-        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchData);
+        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchData, casino);
         player.deposit(300);
         player.betOnMatch(100, match, BettingSide.A);
         player.betOnMatch(50, match, BettingSide.A);
@@ -104,7 +109,7 @@ public class PlayerTest {
 
 	@Test
 	public void testPlayerActBet() {
-		Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchData);
+		Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchData, casino);
 		player.deposit(50);
 		player.act(PlayerActionType.BET, 30, match, BettingSide.A);
 		assertEquals(20, player.getCoins());

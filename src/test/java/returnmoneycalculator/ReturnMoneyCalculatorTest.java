@@ -1,5 +1,6 @@
 package returnmoneycalculator;
 
+import domain.objects.Casino;
 import domain.objects.Match;
 import domain.objects.Player;
 import dto.Betting;
@@ -19,10 +20,12 @@ public class ReturnMoneyCalculatorTest {
     private static MatchData sampleMatchDataWithBSideWinning;
     private static MatchData sampleMatchDataWithDraw;
     private Player player;
+	private Casino casino;
 
     @BeforeEach
-    public void createNewPlayer() {
-        player = PlayerGenerator.generatePlayerWithRandomID();
+    public void createNewPlayerAndCasino() {
+		casino = new Casino();
+        player = PlayerGenerator.generatePlayerWithRandomID(casino);
     }
 
     @BeforeAll
@@ -34,7 +37,7 @@ public class ReturnMoneyCalculatorTest {
 
     @Test
     public void testPlayerBetsOnASideAndGetsAProfitOnVictory() {
-        Match sampleMatch = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning);
+        Match sampleMatch = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning, casino);
         player.deposit(100);
         Betting betting = new Betting(player, sampleMatch, 30, BettingSide.A);
 
@@ -46,7 +49,7 @@ public class ReturnMoneyCalculatorTest {
 
     @Test
     public void testPlayerBetsOnBSideAndGetsAProfitOnVictory() {
-        Match sampleMatch = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithBSideWinning);
+        Match sampleMatch = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithBSideWinning, casino);
         player.deposit(100);
         Betting betting = new Betting(player, sampleMatch, 30, BettingSide.B);
 
@@ -58,7 +61,7 @@ public class ReturnMoneyCalculatorTest {
 
     @Test
     public void testPlayerBetsOnASideAndLosesMoneyOnLoss() {
-        Match sampleMatch = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithBSideWinning);
+        Match sampleMatch = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithBSideWinning, casino);
         player.deposit(100);
         Betting betting = new Betting(player, sampleMatch, 30, BettingSide.A);
 
@@ -70,7 +73,7 @@ public class ReturnMoneyCalculatorTest {
 
     @Test
     public void testPlayerBetsOnBSideAndLosesMoneyOnLoss() {
-        Match sampleMatch = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning);
+        Match sampleMatch = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning, casino);
         player.deposit(100);
         Betting betting = new Betting(player, sampleMatch, 30, BettingSide.B);
 
@@ -82,7 +85,7 @@ public class ReturnMoneyCalculatorTest {
 
     @Test
     public void testPlayerBetsAndGetsHisBetMoneyBackOnDraw() {
-        Match sampleMatch = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithDraw);
+        Match sampleMatch = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithDraw, casino);
         player.deposit(100);
         Betting betting = new Betting(player, sampleMatch, 30, BettingSide.B);
 

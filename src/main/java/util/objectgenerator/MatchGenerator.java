@@ -7,7 +7,7 @@ import dto.MatchData;
 import java.util.UUID;
 
 public class MatchGenerator {
-    public static Match generateMatchWithRandomID(MatchData matchData) {
-        return new Match(UUID.randomUUID(), matchData, new Casino());
+    public static Match generateMatchWithRandomID(MatchData matchData, Casino casino) {
+        return new Match(UUID.randomUUID(), matchData, casino);
     }
 }

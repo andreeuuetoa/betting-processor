@@ -58,4 +58,8 @@ public class Casino {
 	public void addPlayer(Player player) {
 		players.add(player);
 	}
+
+	public List<Player> getLegitimatePlayers() {
+		return players.stream().filter(x -> !illegitimatePlayers.contains(x)).toList();
+	}
 }

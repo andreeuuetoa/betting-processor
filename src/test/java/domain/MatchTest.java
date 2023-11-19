@@ -1,5 +1,6 @@
 package domain;
 
+import domain.objects.Casino;
 import domain.objects.Match;
 import domain.objects.Player;
 import dto.Betting;
@@ -27,7 +28,7 @@ public class MatchTest {
 
     @Test
     public void testCreateSampleMatch() {
-        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning);
+        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning, new Casino());
 
         assertEquals(1.3, match.getMatchData().getABetRate());
         assertEquals(0.75, match.getMatchData().getBBetRate());
@@ -36,8 +37,9 @@ public class MatchTest {
 
     @Test
     public void testBettingWasCreatedCorrectlyForMatch() {
-        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning);
-        Player player = PlayerGenerator.generatePlayerWithRandomID();
+		Casino casino = new Casino();
+        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning, casino);
+        Player player = PlayerGenerator.generatePlayerWithRandomID(casino);
 
         player.deposit(100);
         player.betOnMatch(30, match, BettingSide.A);
@@ -56,9 +58,11 @@ public class MatchTest {
 
     @Test
     public void testPlayerBetsOnASideAndGetsAProfitOnVictory() {
-        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning);
-        Player player = PlayerGenerator.generatePlayerWithRandomID();
+		Casino casino = new Casino();
+        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning, casino);
+        Player player = PlayerGenerator.generatePlayerWithRandomID(casino);
 
+		casino.addPlayer(player);
         player.deposit(100);
         player.betOnMatch(30, match, BettingSide.A);
         match.calculateCasinoProfit();
@@ -69,9 +73,11 @@ public class MatchTest {
 
     @Test
     public void testPlayerBetsOnBSideAndGetsAProfitOnVictory() {
-        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithBSideWinning);
-        Player player = PlayerGenerator.generatePlayerWithRandomID();
+		Casino casino = new Casino();
+        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithBSideWinning, casino);
+        Player player = PlayerGenerator.generatePlayerWithRandomID(casino);
 
+	    casino.addPlayer(player);
         player.deposit(100);
         player.betOnMatch(30, match, BettingSide.B);
         match.calculateCasinoProfit();
@@ -82,9 +88,11 @@ public class MatchTest {
 
     @Test
     public void testPlayerBetsOnASideAndLosesMoneyOnLoss() {
-        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithBSideWinning);
-        Player player = PlayerGenerator.generatePlayerWithRandomID();
+		Casino casino = new Casino();
+        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithBSideWinning, casino);
+        Player player = PlayerGenerator.generatePlayerWithRandomID(casino);
 
+	    casino.addPlayer(player);
         player.deposit(100);
         player.betOnMatch(30, match, BettingSide.A);
         match.calculateCasinoProfit();
@@ -95,9 +103,11 @@ public class MatchTest {
 
     @Test
     public void testPlayerBetsOnBSideAndLosesMoneyOnLoss() {
-        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning);
-        Player player = PlayerGenerator.generatePlayerWithRandomID();
+		Casino casino = new Casino();
+        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning, casino);
+        Player player = PlayerGenerator.generatePlayerWithRandomID(casino);
 
+	    casino.addPlayer(player);
         player.deposit(100);
         player.betOnMatch(30, match, BettingSide.B);
         match.calculateCasinoProfit();
@@ -108,9 +118,11 @@ public class MatchTest {
 
     @Test
     public void testPlayerBetsAndGetsHisBetMoneyBackOnDraw() {
-        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithDraw);
-        Player player = PlayerGenerator.generatePlayerWithRandomID();
+		Casino casino = new Casino();
+        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithDraw, casino);
+        Player player = PlayerGenerator.generatePlayerWithRandomID(casino);
 
+	    casino.addPlayer(player);
         player.deposit(100);
         player.betOnMatch(30, match, BettingSide.B);
         match.calculateCasinoProfit();
@@ -121,10 +133,13 @@ public class MatchTest {
 
     @Test
     public void testManyPlayersBetOnAMatch() {
-        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning);
-        Player playerOne = PlayerGenerator.generatePlayerWithRandomID();
-        Player playerTwo = PlayerGenerator.generatePlayerWithRandomID();
+		Casino casino = new Casino();
+        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning, casino);
+        Player playerOne = PlayerGenerator.generatePlayerWithRandomID(casino);
+        Player playerTwo = PlayerGenerator.generatePlayerWithRandomID(casino);
 
+	    casino.addPlayer(playerOne);
+		casino.addPlayer(playerTwo);
         playerOne.deposit(100);
         playerTwo.deposit(100);
         playerOne.betOnMatch(30, match, BettingSide.A);
@@ -139,9 +154,11 @@ public class MatchTest {
 
     @Test
     public void testPlayerBetsAndIsConsideredIllegal() {
-        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning);
-        Player player = PlayerGenerator.generatePlayerWithRandomID();
+		Casino casino = new Casino();
+        Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchDataWithASideWinning, casino);
+        Player player = PlayerGenerator.generatePlayerWithRandomID(casino);
 
+	    casino.addPlayer(player);
         player.deposit(100);
         player.betOnMatch(150, match, BettingSide.A);
         match.calculateCasinoProfit();

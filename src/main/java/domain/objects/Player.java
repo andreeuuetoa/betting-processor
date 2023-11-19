@@ -11,10 +11,12 @@ import java.util.UUID;
 public class Player {
     private final UUID id;
     private int coins;
+	private Casino casino;
 
-    public Player(UUID id) {
+    public Player(UUID id, Casino casino) {
         this.id = id;
         coins = 0;
+		this.casino = casino;
     }
 
     public void deposit(int coinsToDeposit) {
@@ -23,9 +25,10 @@ public class Player {
 
     public void withdraw(int coinsToWithdraw) {
         if (coins - coinsToWithdraw < 0) {
-            throw new RuntimeException("Player cannot withdraw more coins than he/she currently has.");
+            casino.addIllegitimatePlayer(this);
+        } else {
+	        coins -= coinsToWithdraw;
         }
-        coins -= coinsToWithdraw;
     }
 
     public void betOnMatch(int coinsToBet, Match match, BettingSide side) {
@@ -34,7 +37,7 @@ public class Player {
             match.addBetting(playerBetting);
             withdraw(coinsToBet);
         } catch (Exception e) {
-            match.addIllegitimatePlayer(this);
+            casino.addIllegitimatePlayer(this);
         }
     }
 
