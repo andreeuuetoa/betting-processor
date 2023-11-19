@@ -64,16 +64,7 @@ public class BettingProcessor {
 			player = createNewPlayerWithId(playerId);
 		}
 		Match match = getMatchByIdFromCasinoOrCreateANewOne(playerAction);
-		try {
-			player.act(playerAction.getType(), playerAction.getAmount(), match, playerAction.getBettingSide());
-		} catch (Exception e) {
-			if (hasPlayerWithIdNotMadeAnIllegalMoveBefore(playerId)) {
-				illegalPlayerActions.add(playerAction);
-			}
-			if (!casino.getIllegitimatePlayers().contains(player)) {
-				casino.addIllegitimatePlayer(player);
-			}
-		}
+		player.act(playerAction.getType(), playerAction.getAmount(), match, playerAction.getBettingSide());
 	}
 
 	private Match getMatchByIdFromCasinoOrCreateANewOne(PlayerAction playerAction) {
@@ -85,10 +76,6 @@ public class BettingProcessor {
 		Player newPlayer = new Player(playerId, casino);
 		casino.addPlayer(newPlayer);
 		return newPlayer;
-	}
-
-	private boolean hasPlayerWithIdNotMadeAnIllegalMoveBefore(UUID playerId) {
-		return illegalPlayerActions.stream().noneMatch(x -> x.getPlayerId().equals(playerId));
 	}
 
 	private void saveOutputDataToFile() {
