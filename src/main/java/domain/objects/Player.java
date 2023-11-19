@@ -1,5 +1,6 @@
 package domain.objects;
 
+import domain.constants.PlayerActionType;
 import dto.Betting;
 import domain.constants.BettingSide;
 import lombok.Getter;
@@ -36,4 +37,12 @@ public class Player {
             match.addIllegitimatePlayer(this);
         }
     }
+
+	public void act(PlayerActionType type, int amount, Match match, BettingSide bettingSide) {
+		switch (type) {
+			case DEPOSIT -> deposit(amount);
+			case WITHDRAW -> withdraw(amount);
+			case BET -> betOnMatch(amount, match, bettingSide);
+		}
+	}
 }
