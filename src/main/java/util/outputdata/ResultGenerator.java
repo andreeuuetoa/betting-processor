@@ -4,10 +4,12 @@ import dto.PlayerAction;
 import dto.ResultLegitimatePlayer;
 
 import java.util.List;
+import java.util.Locale;
 
 public class ResultGenerator {
 	public String generateLegitimatePlayerResult(ResultLegitimatePlayer legitimatePlayer) {
-		return String.format("%s %d %.2f",
+		return String.format(Locale.FRANCE,
+				"%s %d %.2f",
 				legitimatePlayer.getPlayerId(),
 				legitimatePlayer.getFinalBalance(),
 				legitimatePlayer.getBettingWinRate());
