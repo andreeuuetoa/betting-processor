@@ -32,6 +32,10 @@ The output is shown in results.txt file located in the folder "src/main/java/mai
 
 ## Developers
 
+Prerequisites:
+* Git
+* JDK 17
+
 To run the application, first clone the repository:
 ````shell
 git clone https://github.com/andreeuuetoa/betting-processor
