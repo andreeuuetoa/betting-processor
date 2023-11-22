@@ -63,11 +63,11 @@ public class BettingProcessor {
 		if (player == null) {
 			player = createNewPlayerWithId(playerId);
 		}
-		Match match = getMatchByIdFromCasinoOrCreateANewOne(playerAction.getMatchId());
+		Match match = getMatchByIdFromCasinoOrIsNotAMatch(playerAction.getMatchId());
 		player.act(playerAction.getType(), playerAction.getAmount(), match, playerAction.getBettingSide());
 	}
 
-	private Match getMatchByIdFromCasinoOrCreateANewOne(UUID matchId) {
+	private Match getMatchByIdFromCasinoOrIsNotAMatch(UUID matchId) {
 		return matchId == null ? null : casino.getMatchById(matchId);
 	}
 
