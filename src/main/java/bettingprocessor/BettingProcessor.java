@@ -14,7 +14,6 @@ import util.outputdata.ResultFileWriter;
 import util.outputdata.ResultGenerator;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,14 +21,12 @@ public class BettingProcessor {
 	private final Path matchDataPath;
 	private final Path playerDataPath;
 	private final Path resultPath;
-	private final List<PlayerAction> illegalPlayerActions;
 	private final Casino casino;
 
 	public BettingProcessor(Path matchDataPath, Path playerDataPath, Path resultPath) {
 		this.matchDataPath = matchDataPath;
 		this.playerDataPath = playerDataPath;
 		this.resultPath = resultPath;
-		illegalPlayerActions = new ArrayList<>();
 		casino = new Casino();
 	}
 
