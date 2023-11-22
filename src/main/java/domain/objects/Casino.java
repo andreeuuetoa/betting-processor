@@ -26,20 +26,20 @@ public class Casino {
     }
 
 	public void addIllegitimatePlayer(Player player) {
-		if (hasPlayerMadeAnIllegalActionBefore(player.getId())) {
+		if (hasPlayerWithIdMadeAnIllegalActionBefore(player.getId())) {
 			illegitimatePlayers.add(player);
 			illegitimatePlayers.sort(Comparator.comparing(Player::getId));
 		}
 	}
 
 	public void addIllegitimatePlayerAction(PlayerAction playerAction) {
-		if (hasPlayerMadeAnIllegalActionBefore(playerAction.getPlayerId())) {
+		if (hasPlayerWithIdMadeAnIllegalActionBefore(playerAction.getPlayerId())) {
 			illegitimatePlayersFirstActions.add(playerAction);
 		}
 	}
 
-	private boolean hasPlayerMadeAnIllegalActionBefore(UUID playerAction) {
-		return illegitimatePlayersFirstActions.stream().noneMatch(x -> x.getPlayerId().equals(playerAction));
+	private boolean hasPlayerWithIdMadeAnIllegalActionBefore(UUID playerId) {
+		return illegitimatePlayersFirstActions.stream().noneMatch(x -> x.getPlayerId().equals(playerId));
 	}
 
 	public Match getMatchById(UUID matchId) {
