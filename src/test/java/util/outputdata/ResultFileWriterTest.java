@@ -15,7 +15,7 @@ public class ResultFileWriterTest {
 	public void testWriteSampleDataWithNewLinesToResultFile() {
 		Path path = Paths.get("src", "test", "resources", "result", "test_file.txt");
 		String sampleData = "Hello, world!\nNew line!";
-		new ResultFileWriter(path).writeResultToFile(sampleData);
+		new ResultFileWriter(path).writeResult(sampleData);
 		assertDoesNotThrow(() -> {Files.newBufferedReader(path);});
 		try (BufferedReader reader = Files.newBufferedReader(path)) {
 			StringBuilder dataInFile = new StringBuilder();

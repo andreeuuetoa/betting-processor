@@ -13,14 +13,14 @@ public class MatchDataFileExtractorTest {
 	@Test
 	public void testExtractMatchFromFileWithOneMatch() {
 		Path path = Paths.get("src", "test", "resources", "matchdata", "one_match_data.txt");
-		List<MatchInfo> matchesFromFile = new MatchDataFileExtractor().extractMatchInfoFromFileInPath(path);
+		List<MatchInfo> matchesFromFile = new MatchDataFileExtractor(path).getMatchInfo();
 		assertEquals(1, matchesFromFile.size());
 	}
 
 	@Test
 	public void testExtractMatchesFromFileWithMultipleMatches() {
 		Path path = Paths.get("src", "test", "resources", "matchdata", "match_data.txt");
-		List<MatchInfo> matchesFromFile = new MatchDataFileExtractor().extractMatchInfoFromFileInPath(path);
+		List<MatchInfo> matchesFromFile = new MatchDataFileExtractor(path).getMatchInfo();
 		assertEquals(13, matchesFromFile.size());
 	}
 }

@@ -8,25 +8,30 @@ import dto.PlayerAction;
 import dto.ResultLegitimatePlayer;
 import mapper.MatchMapper;
 import mapper.ResultLegitimatePlayerMapper;
+import util.inputdata.MatchDataExtractor;
 import util.inputdata.MatchDataFileExtractor;
+import util.inputdata.PlayerActionDataExtractor;
 import util.inputdata.PlayerActionDataFileExtractor;
 import util.outputdata.ResultFileWriter;
 import util.outputdata.ResultGenerator;
+import util.outputdata.ResultWriter;
 
 import java.nio.file.Path;
 import java.util.List;
 import java.util.UUID;
 
 public class BettingProcessor {
-	private final Path matchDataPath;
-	private final Path playerDataPath;
-	private final Path resultPath;
 	private final Casino casino;
+	private final MatchDataExtractor matchDataExtractor;
+	private final PlayerActionDataExtractor playerActionDataExtractor;
+	private final ResultWriter resultWriter;
 
-	public BettingProcessor(Path matchDataPath, Path playerDataPath, Path resultPath) {
-		this.matchDataPath = matchDataPath;
-		this.playerDataPath = playerDataPath;
-		this.resultPath = resultPath;
+	public BettingProcessor(MatchDataExtractor matchDataExtractor,
+							PlayerActionDataExtractor playerActionDataExtractor,
+							ResultWriter resultWriter) {
+		this.matchDataExtractor = matchDataExtractor;
+		this.playerActionDataExtractor = playerActionDataExtractor;
+		this.resultWriter = resultWriter;
 		casino = new Casino();
 	}
 
@@ -39,9 +44,9 @@ public class BettingProcessor {
 	}
 
 	private void analyzeInputAndSaveDataToCasino() {
-		List<MatchInfo> matchesFromFile = new MatchDataFileExtractor().extractMatchInfoFromFileInPath(matchDataPath);
+		List<MatchInfo> matchesFromFile = matchDataExtractor.getMatchInfo();
 		List<Match> matchesWithCasino = new MatchMapper().getMatchesWithCasino(matchesFromFile, casino);
-		List<PlayerAction> playerActionsFromFile = new PlayerActionDataFileExtractor().extractPlayerActionInfoFromFileInPath(playerDataPath);
+		List<PlayerAction> playerActionsFromFile = playerActionDataExtractor.getPlayerActions();
 		addMatchesToCasino(matchesWithCasino);
 		for (PlayerAction playerAction : playerActionsFromFile) {
 			analyzePlayerAction(playerAction);
@@ -76,7 +81,7 @@ public class BettingProcessor {
 
 	private void saveOutputDataToFile() {
 		String generatedOutput = generateOutputData();
-		new ResultFileWriter(resultPath).writeResultToFile(generatedOutput);
+		resultWriter.writeResult(generatedOutput);
 	}
 
 	private String generateOutputData() {
