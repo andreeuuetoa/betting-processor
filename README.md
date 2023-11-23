@@ -53,7 +53,7 @@ To run the unit tests:
 
 ## Retrospective
 
-The assignment was quite fun and excite to work on.
+The assignment was quite fun and exciting to work on.
 It also gave me a good project to practice test-driven development on,
 which contributed heavily to making the assignment fun to work on,
 since I did not have to spend that much time hunting out all the bugs that may be hiding in inconvenient places.
