@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerActionDataFileReader {
-	private Path playerActionDataFilePath;
+	private final Path playerActionDataFilePath;
 
 	public PlayerActionDataFileReader(Path path) {
 		playerActionDataFilePath = path;

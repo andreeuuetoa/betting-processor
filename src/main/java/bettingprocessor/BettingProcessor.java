@@ -9,14 +9,10 @@ import dto.ResultLegitimatePlayer;
 import mapper.MatchMapper;
 import mapper.ResultLegitimatePlayerMapper;
 import util.inputdata.MatchDataExtractor;
-import util.inputdata.MatchDataFileExtractor;
 import util.inputdata.PlayerActionDataExtractor;
-import util.inputdata.PlayerActionDataFileExtractor;
-import util.outputdata.ResultFileWriter;
 import util.outputdata.ResultGenerator;
 import util.outputdata.ResultWriter;
 
-import java.nio.file.Path;
 import java.util.List;
 import java.util.UUID;
 

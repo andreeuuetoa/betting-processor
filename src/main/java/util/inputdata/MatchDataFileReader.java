@@ -1,6 +1,5 @@
 package util.inputdata;
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MatchDataFileReader {
-	private Path matchDataFilePath;
+	private final Path matchDataFilePath;
 
 	public MatchDataFileReader(Path path) {
 		matchDataFilePath = path;
