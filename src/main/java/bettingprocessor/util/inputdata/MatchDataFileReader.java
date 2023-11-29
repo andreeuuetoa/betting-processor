@@ -25,7 +25,7 @@ public class MatchDataFileReader {
                 matches.add(line);
             }
         } catch (IOException e) {
-	        throw new RuntimeException("File in path: " + matchDataFilePath.toString() + " was not found.");
+	        throw new RuntimeException("File in path: " + matchDataFilePath + " was not found.");
         }
         return matches;
     }

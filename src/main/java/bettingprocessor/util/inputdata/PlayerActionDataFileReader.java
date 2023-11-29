@@ -25,7 +25,7 @@ public class PlayerActionDataFileReader {
 				playerActions.add(line);
 			}
 		} catch (IOException e) {
-			throw new RuntimeException("File in path: " + playerActionDataFilePath.toString() + " was not found.");
+			throw new RuntimeException("File in path: " + playerActionDataFilePath + " was not found.");
 		}
 		return playerActions;
 	}
