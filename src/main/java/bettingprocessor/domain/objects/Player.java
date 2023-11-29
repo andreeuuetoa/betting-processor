@@ -12,7 +12,7 @@ import java.util.UUID;
 public class Player {
     private final UUID id;
     private int coins;
-	private Casino casino;
+	private final Casino casino;
 	private int matchesPlayed;
 	private int matchesWon;
 

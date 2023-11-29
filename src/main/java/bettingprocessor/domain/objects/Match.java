@@ -12,9 +12,9 @@ import java.util.*;
 @Getter
 public class Match {
     private final UUID id;
-    private MatchData matchData;
-    private List<Betting> bettings;
-    private Casino casino;
+    private final MatchData matchData;
+    private final List<Betting> bettings;
+    private final Casino casino;
 
     public Match(UUID id, MatchData matchData, Casino casino) {
         this.id = id;
