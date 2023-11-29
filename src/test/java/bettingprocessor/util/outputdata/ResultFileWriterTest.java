@@ -8,7 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ResultFileWriterTest {
 	@Test
@@ -16,7 +16,6 @@ public class ResultFileWriterTest {
 		Path path = Paths.get("src", "test", "resources", "result", "test_file.txt");
 		String sampleData = "Hello, world!\nNew line!";
 		new ResultFileWriter(path).writeResult(sampleData);
-		assertDoesNotThrow(() -> {Files.newBufferedReader(path);});
 		try (BufferedReader reader = Files.newBufferedReader(path)) {
 			StringBuilder dataInFile = new StringBuilder();
 			while (true) {
