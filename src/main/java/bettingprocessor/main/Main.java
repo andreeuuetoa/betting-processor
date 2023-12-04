@@ -12,9 +12,9 @@ import java.nio.file.Paths;
 
 public class Main {
     public static void main(String[] args) {
-	    Path matchDataPath = Paths.get("src", "bettingprocessor/main", "resources", "match_data.txt");
-		Path playerDataPath = Paths.get("src", "bettingprocessor/main", "resources", "player_data.txt");
-		Path resultPath = Paths.get("src", "bettingprocessor/main", "java", "bettingprocessor/main", "results.txt");
+	    Path matchDataPath = Paths.get("src", "main", "resources", "match_data.txt");
+		Path playerDataPath = Paths.get("src", "main", "resources", "player_data.txt");
+		Path resultPath = Paths.get("src", "main", "java", "bettingprocessor/main", "results.txt");
 		MatchDataExtractor matchDataExtractor = new MatchDataFileExtractor(matchDataPath);
 		PlayerActionDataExtractor playerActionDataExtractor = new PlayerActionDataFileExtractor(playerDataPath);
 		ResultWriter resultWriter = new ResultFileWriter(resultPath);
