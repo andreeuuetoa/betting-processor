@@ -2,11 +2,10 @@ package bettingprocessor.main;
 
 import org.junit.jupiter.api.Test;
 
-import java.nio.file.Files;
+import java.io.File;
 import java.nio.file.Paths;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MainTest {
 	@Test
@@ -16,9 +15,7 @@ public class MainTest {
 
 	@Test
 	public void testMatchDataFileExists() {
-		assertDoesNotThrow(() -> {
-			Files.newBufferedReader(Main.matchDataPath);
-		});
+		assertTrue(new File(String.valueOf(Main.matchDataPath)).isFile());
 	}
 
 	@Test
@@ -28,9 +25,7 @@ public class MainTest {
 
 	@Test
 	public void testPlayerDataFileExists() {
-		assertDoesNotThrow(() -> {
-			Files.newBufferedReader(Main.playerDataPath);
-		});
+		assertTrue(new File(String.valueOf(Main.playerDataPath)).isFile());
 	}
 
 	@Test
@@ -41,8 +36,6 @@ public class MainTest {
 	@Test
 	public void testAfterRunningMainResultsFileExists() {
 		Main.main(null);
-		assertDoesNotThrow(() -> {
-			Files.newBufferedReader(Main.resultPath);
-		});
+		assertTrue(new File(String.valueOf(Main.resultPath)).isFile());
 	}
 }
