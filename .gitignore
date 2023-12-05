@@ -56,3 +56,6 @@ Thumbs.db
 *.war/out
 
 !gradle-wrapper.jar
+
+**/results.txt
+**/test_file.txt
