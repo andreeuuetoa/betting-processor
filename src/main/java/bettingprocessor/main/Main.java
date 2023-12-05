@@ -11,10 +11,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Main {
+	public static Path matchDataPath = Paths.get("src", "main", "resources", "match_data.txt");
+	public static Path playerDataPath = Paths.get("src", "main", "resources", "player_data.txt");
+	public static Path resultPath = Paths.get("src", "main", "java", "bettingprocessor", "main", "results.txt");
+
     public static void main(String[] args) {
-	    Path matchDataPath = Paths.get("src", "main", "resources", "match_data.txt");
-		Path playerDataPath = Paths.get("src", "main", "resources", "player_data.txt");
-		Path resultPath = Paths.get("src", "main", "java", "bettingprocessor", "main", "results.txt");
 		MatchDataExtractor matchDataExtractor = new MatchDataFileExtractor(matchDataPath);
 		PlayerActionDataExtractor playerActionDataExtractor = new PlayerActionDataFileExtractor(playerDataPath);
 		ResultWriter resultWriter = new ResultFileWriter(resultPath);
