@@ -36,10 +36,10 @@ public class ReturnMoneyCalculator {
     }
 
     private int getMoneyWithProfitOnASide(int money) {
-        return (int) (money * getMatchData().getABetRate());
+        return (int) (money + money * getMatchData().getABetRate());
     }
 
     private int getMoneyWithProfitOnBSide(int money) {
-        return (int) (money * getMatchData().getBBetRate());
+        return (int) (money + money * getMatchData().getBBetRate());
     }
 }

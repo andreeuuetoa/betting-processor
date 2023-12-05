@@ -44,7 +44,7 @@ public class ReturnMoneyCalculatorTest {
         ReturnMoneyCalculator returnMoneyCalculator = new ReturnMoneyCalculator(sampleMatchDataWithASideWinning);
         int moneyGotBack = returnMoneyCalculator.calculateMoneyGotBackFromBetting(betting);
 
-        assertEquals(39, moneyGotBack);
+        assertEquals(69, moneyGotBack);
     }
 
     @Test
@@ -56,7 +56,7 @@ public class ReturnMoneyCalculatorTest {
         ReturnMoneyCalculator returnMoneyCalculator = new ReturnMoneyCalculator(sampleMatchDataWithBSideWinning);
         int moneyGotBack = returnMoneyCalculator.calculateMoneyGotBackFromBetting(betting);
 
-        assertEquals(22, moneyGotBack);
+        assertEquals(52, moneyGotBack);
     }
 
     @Test

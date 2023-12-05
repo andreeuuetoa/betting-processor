@@ -67,7 +67,7 @@ public class CasinoTest {
         casino.addMatch(match);
         casino.playMatches();
 
-        assertEquals(115, player.getCoins());
+        assertEquals(165, player.getCoins());
     }
 
     @Test
@@ -80,7 +80,7 @@ public class CasinoTest {
         casino.addMatch(match);
         casino.playMatches();
 
-        assertEquals(-15, casino.getBalance());
+        assertEquals(-65, casino.getBalance());
     }
 
     @Test

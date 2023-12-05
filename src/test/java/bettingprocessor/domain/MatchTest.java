@@ -68,7 +68,7 @@ public class MatchTest {
         match.calculateCasinoProfit();
         match.payToPlayers();
 
-        assertEquals(109, player.getCoins());
+        assertEquals(139, player.getCoins());
     }
 
     @Test
@@ -83,7 +83,7 @@ public class MatchTest {
         match.calculateCasinoProfit();
         match.payToPlayers();
 
-        assertEquals(92, player.getCoins());
+        assertEquals(122, player.getCoins());
     }
 
     @Test
@@ -148,7 +148,7 @@ public class MatchTest {
         match.payToPlayers();
 
         assertEquals(2, match.getBettings().size());
-        assertEquals(109, playerOne.getCoins());
+        assertEquals(139, playerOne.getCoins());
         assertEquals(70, playerTwo.getCoins());
     }
 
