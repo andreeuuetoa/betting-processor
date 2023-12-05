@@ -10,10 +10,12 @@ public class MatchParser {
 
 	public MatchInfo parseMatchInfoFromString(String line) {
 		String[] matchElements = line.split(",");
+
 		UUID matchId = UUID.fromString(matchElements[0]);
 		double aBetRate = Double.parseDouble(matchElements[1]);
 		double bBetRate = Double.parseDouble(matchElements[2]);
 		MatchOutcome matchOutcome = parseMatchOutcomeFromString(matchElements[3]);
+
 		return new MatchInfo(matchId, new MatchData(aBetRate, bBetRate, matchOutcome));
 	}
 

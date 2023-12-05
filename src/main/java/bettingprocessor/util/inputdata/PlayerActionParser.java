@@ -9,11 +9,13 @@ import java.util.UUID;
 public class PlayerActionParser {
 	public PlayerAction parsePlayerActionFromString(String playerActionAsString) {
 		String[] playerActionElements = playerActionAsString.split(",");
+
 		UUID playerId = UUID.fromString(playerActionElements[0]);
 		PlayerActionType playerActionType = parsePlayerActionTypeFromString(playerActionElements[1]);
-		UUID matchId = playerActionElements[2].isEmpty() ? null : UUID.fromString(playerActionElements[2]);
+		UUID matchId = getMatchIdFromString(playerActionElements[2]);
 		int amount = Integer.parseInt(playerActionElements[3]);
-		BettingSide bettingSide = playerActionElements.length == 5 ? parseBettingSideFromString(playerActionElements[4]) : null;
+		BettingSide bettingSide = getBettingSideFromElementsIfExists(playerActionElements);
+
 		return new PlayerAction(playerId, playerActionType, matchId, amount, bettingSide);
 	}
 
@@ -24,6 +26,14 @@ public class PlayerActionParser {
 			case "BET" -> PlayerActionType.BET;
 			default -> throw new IllegalStateException("Unexpected match outcome: " + playerActionTypeAsString);
 		};
+	}
+
+	private UUID getMatchIdFromString(String playerActionElements) {
+		return playerActionElements.isEmpty() ? null : UUID.fromString(playerActionElements);
+	}
+
+	private BettingSide getBettingSideFromElementsIfExists(String[] playerActionElements) {
+		return playerActionElements.length == 5 ? parseBettingSideFromString(playerActionElements[4]) : null;
 	}
 
 	private BettingSide parseBettingSideFromString(String bettingSideAsString) {
