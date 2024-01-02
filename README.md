@@ -3,7 +3,7 @@ This is my solution to the PlayTech internship assignment.
 The task was to create an application that processes betting data.
 
 ## Short description
-The program takes a group of data as an input, where there is specified the matches played in the casin, the players who took part of them and their operations in the matches.
+The program takes a group of data as an input, where there is specified the matches played in the casino, the players who took part of them and their operations in the matches.
 The matches and the operations are ordered by time, with older events first.
 The input data can be found in folder (starting from the project root folder): "src/main/resources".
 In that folder, there are two files, match_data.txt and player_data.txt, both of which can be modified by hand, but the line structure within must remain.
