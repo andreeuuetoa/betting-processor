@@ -48,14 +48,6 @@ public class Player {
         }
     }
 
-	public void act(PlayerActionType type, int amount, Match match, BettingSide bettingSide) {
-		switch (type) {
-			case DEPOSIT -> deposit(amount);
-			case WITHDRAW -> withdraw(amount);
-			case BET -> betOnMatch(amount, match, bettingSide);
-		}
-	}
-
 	public double getWinRate() {
 		if (getMatchesPlayed() == 0) {
 			return 0;

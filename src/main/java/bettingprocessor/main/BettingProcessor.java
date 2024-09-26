@@ -62,7 +62,11 @@ public class BettingProcessor {
 			player = createNewPlayerWithId(playerId);
 		}
 		Match match = getMatchByIdFromCasinoOrIsNotAMatch(playerAction.getMatchId());
-		player.act(playerAction.getType(), playerAction.getAmount(), match, playerAction.getBettingSide());
+		switch (playerAction.getType()) {
+			case DEPOSIT -> player.deposit(playerAction.getAmount());
+			case WITHDRAW -> player.withdraw(playerAction.getAmount());
+			case BET -> player.betOnMatch(playerAction.getAmount(), match, playerAction.getBettingSide());
+		}
 	}
 
 	private Match getMatchByIdFromCasinoOrIsNotAMatch(UUID matchId) {

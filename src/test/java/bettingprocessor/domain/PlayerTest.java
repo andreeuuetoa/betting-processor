@@ -98,25 +98,4 @@ public class PlayerTest {
         player.betOnMatch(50, match, BettingSide.A);
         assertEquals(200, player.getCoins());
     }
-
-	@Test
-	public void testPlayerActDeposit() {
-		player.act(PlayerActionType.DEPOSIT, 300, null, null);
-		assertEquals(300, player.getCoins());
-	}
-
-	@Test
-	public void testPlayerActWithdraw() {
-		player.deposit(300);
-		player.act(PlayerActionType.WITHDRAW, 200, null, null);
-		assertEquals(100, player.getCoins());
-	}
-
-	@Test
-	public void testPlayerActBet() {
-		Match match = MatchGenerator.generateMatchWithRandomID(sampleMatchData, casino);
-		player.deposit(50);
-		player.act(PlayerActionType.BET, 30, match, BettingSide.A);
-		assertEquals(20, player.getCoins());
-	}
 }
