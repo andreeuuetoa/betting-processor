@@ -1,6 +1,5 @@
 package bettingprocessor.domain;
 
-import bettingprocessor.domain.constants.PlayerActionType;
 import bettingprocessor.domain.objects.Casino;
 import bettingprocessor.domain.objects.Match;
 import bettingprocessor.domain.objects.Player;
